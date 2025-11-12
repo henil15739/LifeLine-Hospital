@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Billing - LIFELINE Hospital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#0288d1;
+      --accent-2:#06b6d4;
+      --muted:#51656a;
+      --bg-start:#eaf6fb;
+      --bg-end:#f7fbff;
+      --card:#ffffff;
+      --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Inter",system-ui,Arial,sans-serif;
+      background: radial-gradient(800px 320px at 10% 10%, rgba(2,136,209,0.06), transparent 8%),
+                  linear-gradient(180deg,var(--bg-start),var(--bg-end));
+      color:#042a35;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:28px 16px;
+    }
+
+    .wrap{ 
+      max-width:var(--maxw);
+      margin:0 auto; 
+    }
+
+    /* navbar (keeps look consistent with site) */
+    .navbar{
+      display:flex; 
+      align-items:center; 
+      gap:12px;
+      background:lightskyblue; 
+      padding:10px 14px; 
+      border-radius:24px;
+      box-shadow:0 8px 30px rgba(2,6,23,0.06); 
+      margin-bottom:20px;
+    }
+    .navbar .logo{ 
+      width:48px; 
+      height:48px; 
+      border-radius:50%; 
+      object-fit:cover; 
+    }
+    .nav-links{ 
+      display:flex; 
+      gap:14px; 
+      align-items:center; 
+      margin-left:8px; 
+      flex-wrap:wrap;
+     }
+    .nav-links a{ 
+      text-decoration:none; 
+      color:#032a2a; 
+      font-weight:600; 
+      padding:8px 12px; 
+      border-radius:8px; 
+    }
+    .nav-links a:hover{ 
+      background:var(--accent); 
+      color:#fff; 
+    }
+
+    /* hero */
+    header.hero{
+      display:flex; 
+      align-items:center; 
+      gap:12px;
+      background:linear-gradient(90deg, rgba(2,136,209,0.06), rgba(6,182,212,0.03));
+      padding:18px;
+       border-radius:12px; 
+       margin-bottom:20px; 
+       box-shadow:0 10px 30px rgba(2,6,23,0.04);
+    }
+    .hero .title{ 
+      font-size:18px; 
+      font-weight:700; 
+      margin:0; 
+      color:#042a35; 
+    }
+    .hero .sub{ 
+      margin:4px 0 0; 
+      color:var(--muted); 
+      font-size:13px; 
+    }
+
+    /* billing card */
+    .billing{
+      background:var(--card); 
+      border-radius:12px; 
+      padding:22px; 
+      box-shadow:0 14px 40px rgba(2,6,23,0.06);
+    }
+    .billing-grid{
+      display:grid; 
+      grid-template-columns: 1fr 320px; 
+      gap:20px; 
+      align-items:start;
+    }
+
+    .form {
+      display:flex; 
+      flex-direction:column; 
+      gap:12px;
+    }
+    .form-row{ 
+      display:flex; 
+      gap:10px; 
+      flex-wrap:wrap; 
+    }
+    input[type="text"], input[type="number"], select{
+      padding:10px 12px; 
+      border-radius:8px; 
+      border:1px solid #e6f0f6; 
+      background:#fbfeff;
+      font-size:14px;
+       min-width:160px;
+    }
+    .btn{
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#fff; 
+      border:none; 
+      padding:10px 16px; 
+      border-radius:10px; 
+      cursor:pointer; 
+      font-weight:800;
+    }
+    .btn.ghost{
+      background:transparent; 
+      color:var(--accent); 
+      border:1px solid rgba(2,136,209,0.12); 
+    }
+
+    .charges {
+      background:linear-gradient(180deg,#fff,#fbfeff); 
+      border-radius:10px; 
+      padding:12px; 
+      border:1px solid #e6f3f8;
+    }
+    .charges table{ 
+      width:100%;
+       border-collapse:collapse; 
+       font-size:14px;
+       }
+    .charges th, .charges td{ 
+      padding:10px 8px; 
+      text-align:left; 
+      border-bottom:1px solid #eef6fa; 
+    }
+    .charges th{ 
+      background:linear-gradient(90deg,var(--accent),var(--accent-2)); 
+      color:#fff; 
+      font-weight:700; 
+    }
+    .total{ 
+      margin-top:12px; 
+      font-weight:800;
+       font-size:18px;
+        color:#042a35;
+         text-align:right;
+         }
+
+    .card-actions{ 
+      display:flex; 
+      gap:10px; 
+      justify-content:flex-end; 
+      margin-top:12px; 
+    }
+
+    /* small screens */
+    @media (max-width:900px){
+      .billing-grid{ 
+        grid-template-columns:1fr;
+       }
+      .nav-links{ 
+        display:none;
+       }
+    }
+
+    /* footer */
+    .footer{
+      margin-top:20px; 
+      padding:18px; 
+      border-radius:10px; 
+      background:#08121a; 
+      color:#cfeff2; 
+      box-shadow:0 8px 30px rgba(2,6,23,0.06);
+    }
+    .footer .cols{ 
+      display:flex;
+       gap:24px;
+        flex-wrap:wrap; 
+      }
+    .footer h4{ 
+      margin:0 0 8px 0;
+       color:#fff; 
+      }
+    .footer p, .footer li{ 
+      color:#b8d9dd;
+       margin:6px 0; 
+      }
+  </style>
+</head>
+<body>
+  <script>
+    // Check authentication
+    function checkAccess(){
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      if(!isLoggedIn){
+        window.location.href = 'index.html';
+      }
+    }
+    checkAccess();
+  </script>
+
+  <div class="wrap">
+    <nav class="navbar">
+      <img src="pic.jpg" alt="logo" class="logo">
+      <div class="nav-links">
+        <a href="Managment.html">Home</a>
+        <a href="Miracles-of-care.html">Miracles</a>
+        <a href="Transparent-Services-&-Friendly-Staff.html">Services</a>
+        <a href="appoinment.html">Appointment</a>
+        <a href="patientrecord.html">Patient Records</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <h2 class="title">Patient Billing</h2>
+        <div class="sub">Create, preview and download patient bills quickly.</div>
+      </div>
+      <div style="margin-left:auto; text-align:right; color:var(--muted)">
+        <div style="font-weight:700">Support</div>
+        <div style="font-size:13px">Call: +91 79 8677 2000</div>
+      </div>
+    </header>
+
+    <main class="billing" role="main">
+      <div class="billing-grid">
+        <section>
+          <form id="billForm" class="form" autocomplete="off">
+            <div class="form-row">
+              <input id="patientName" type="text" placeholder="Patient Name" required>
+              <input id="invoiceNo" type="text" placeholder="Invoice # (auto)" readonly>
+            </div>
+
+            <div class="form-row">
+              <input id="chargeName" type="text" placeholder="Charge description" required>
+              <input id="chargeAmount" type="number" placeholder="Amount (₹)" min="0" required>
+              <button id="addCharge" class="btn" type="button">Add</button>
+            </div>
+
+            <div style="display:flex;gap:10px;align-items:center">
+              <button id="saveBill" class="btn" type="button">Save Bill</button>
+              <button id="clearBtn" class="btn ghost" type="button">Clear</button>
+            </div>
+
+            <small style="color:var(--muted)">Saved bills are stored locally in your browser.</small>
+          </form>
+        </section>
+
+        <aside class="charges" aria-label="Charges and total">
+          <table id="chargesTable" aria-hidden="false">
+            <thead>
+              <tr><th>Charge</th><th style="width:120px">Amount (₹)</th></tr>
+            </thead>
+            <tbody id="chargesBody">
+              <tr><td colspan="2" style="text-align:center;color:var(--muted)">No charges yet</td></tr>
+            </tbody>
+          </table>
+
+          <div class="total" id="totalDisplay">Total: ₹0</div>
+
+          <div class="card-actions">
+            <button id="downloadBtn" class="btn ghost" type="button">Download CSV</button>
+            <button id="printBtn" class="btn" type="button">Print</button>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <div class="footer" role="contentinfo">
+      <div class="cols">
+        <div style="flex:1;min-width:220px">
+          <h4>LIFELINE Hospital</h4>
+          <p>Vaishnodevi Circle, SG Highway, Ahmedabad - 382421</p>
+          <p>📞 +91 79 8677 2000</p>
+        </div>
+        <div style="flex:1;min-width:220px">
+          <h4>Quick Links</h4>
+          <ul style="list-style:none;padding:0;margin:0">
+            <li><a href="Managment.html" style="color:#bfeff3;text-decoration:none">Home</a></li>
+            <li><a href="patientrecord.html" style="color:#bfeff3;text-decoration:none">Patient Records</a></li>
+            <li><a href="appoinment.html" style="color:#bfeff3;text-decoration:none">Book Appointment</a></li>
+          </ul>
+        </div>
+        <div style="flex:1;min-width:220px">
+          <h4>Follow</h4>
+          <p>Facebook • Instagram • LinkedIn • YouTube</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simple billing storage per invoice stored in localStorage.bills
+    const invoiceNoEl = document.getElementById('invoiceNo');
+    const patientEl = document.getElementById('patientName');
+    const chargeNameEl = document.getElementById('chargeName');
+    const chargeAmountEl = document.getElementById('chargeAmount');
+    const addChargeBtn = document.getElementById('addCharge');
+    const chargesBody = document.getElementById('chargesBody');
+    const totalDisplay = document.getElementById('totalDisplay');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const printBtn = document.getElementById('printBtn');
+    const saveBillBtn = document.getElementById('saveBill');
+    const clearBtn = document.getElementById('clearBtn');
+
+    let charges = [];
+    let invoiceCounter = Number(localStorage.getItem('invoiceCounter') || 1000);
+    function newInvoice() { invoiceCounter++; localStorage.setItem('invoiceCounter', invoiceCounter); invoiceNoEl.value = 'INV' + invoiceCounter; }
+    newInvoice();
+
+    function renderCharges(){
+      chargesBody.innerHTML = '';
+      if (!charges.length) {
+        chargesBody.innerHTML = '<tr><td colspan="2" style="text-align:center;color:var(--muted)">No charges yet</td></tr>';
+      } else {
+        charges.forEach((c, i) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${escapeHtml(c.name)}</td><td>₹${Number(c.amount).toFixed(2)} <button data-idx="${i}" style="float:right;background:transparent;border:none;color:#ef7560;cursor:pointer">✕</button></td>`;
+          chargesBody.appendChild(tr);
+        });
+      }
+      const total = charges.reduce((s, c) => s + Number(c.amount||0), 0);
+      totalDisplay.textContent = 'Total: ₹' + total.toFixed(2);
+      attachRemove();
+    }
+
+    function attachRemove(){
+      chargesBody.querySelectorAll('button[data-idx]').forEach(btn=>{
+        btn.onclick = ()=> {
+          const idx = Number(btn.getAttribute('data-idx'));
+          charges.splice(idx,1);
+          renderCharges();
+        };
+      });
+    }
+
+    addChargeBtn.addEventListener('click', ()=>{
+      const name = chargeNameEl.value.trim();
+      const amount = parseFloat(chargeAmountEl.value);
+      if (!name || !isFinite(amount)) { alert('Enter valid charge and amount'); return; }
+      charges.push({ name, amount });
+      chargeNameEl.value=''; chargeAmountEl.value='';
+      renderCharges();
+    });
+
+    saveBillBtn.addEventListener('click', ()=>{
+      const patient = patientEl.value.trim();
+      if (!patient) { alert('Enter patient name'); return; }
+      if (!charges.length) { alert('Add at least one charge'); return; }
+      const bill = { invoice: invoiceNoEl.value || ('INV'+Date.now()), patient, charges, total: charges.reduce((s,c)=>s+Number(c.amount),0), created: new Date().toISOString() };
+      const stored = JSON.parse(localStorage.getItem('bills') || '[]');
+      stored.push(bill);
+      localStorage.setItem('bills', JSON.stringify(stored));
+      alert('Bill saved locally');
+      // reset for next invoice
+      charges = [];
+      renderCharges();
+      patientEl.value=''; newInvoice();
+    });
+
+    downloadBtn.addEventListener('click', ()=>{
+      const patient = patientEl.value.trim() || 'patient';
+      if (!charges.length) { alert('No charges to download'); return; }
+      let csv = `Invoice,${invoiceNoEl.value}\nPatient,${patient}\nCharge,Amount\n`;
+      charges.forEach(c => csv += `"${c.name.replace(/"/g,'""')}",${c.amount}\n`);
+      const total = charges.reduce((s,c)=>s+Number(c.amount),0);
+      csv += `Total,${total}\n`;
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = `${patient}_bill_${invoiceNoEl.value}.csv`;
+      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    printBtn.addEventListener('click', ()=>{
+      const w = window.open('', '_blank', 'width=800,height=900');
+      const doc = w.document;
+      const patient = escapeHtml(patientEl.value || '');
+      const invoice = escapeHtml(invoiceNoEl.value || '');
+      let rows = '';
+      charges.forEach(c => rows += `<tr><td>${escapeHtml(c.name)}</td><td style="text-align:right">₹${Number(c.amount).toFixed(2)}</td></tr>`);
+      const total = charges.reduce((s,c)=>s+Number(c.amount),0).toFixed(2);
+      doc.write(`<html><head><title>Bill - ${invoice}</title>
+        <style>body{font-family:Arial;padding:24px}table{width:100%;border-collapse:collapse}td,th{padding:8px;border-bottom:1px solid #ddd}th{background:#0288d1;color:#fff}</style>
+        </head><body>
+        <h2>LIFELINE Hospital</h2><p>Invoice: ${invoice}</p><p>Patient: ${patient}</p>
+        <table><thead><tr><th>Charge</th><th style="text-align:right">Amount</th></tr></thead><tbody>${rows}</tbody></table>
+        <h3 style="text-align:right">Total: ₹${total}</h3>
+        </body></html>`);
+      doc.close(); w.print();
+    });
+
+    clearBtn.addEventListener('click', ()=>{
+      if (!confirm('Clear current charges?')) return;
+      charges = []; renderCharges();
+    });
+
+    // helpers
+    function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]); }
+
+    // initial state
+    renderCharges();
+  </script>
+</body>
+</html>

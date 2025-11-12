@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Patient Dashboard - LIFELINE Hospital</title>
+  <style>
+    :root{
+      --accent:#ff6f00;
+      --accent-2:#0288d1;
+      --muted:#56606b;
+      --card:#ffffff;
+      --maxw:1150px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, Arial, sans-serif;
+      background: linear-gradient(180deg,#f0f7ff,#fbfcff);
+      color:#07212a;
+      padding:28px 16px;
+      -webkit-font-smoothing:antialiased;
+    }
+    .wrap{ max-width:var(--maxw); margin:0 auto; }
+    .topbar{
+      display:flex;align-items:center;gap:12px;justify-content:space-between;
+      background:linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.9));
+      padding:10px 14px;border-radius:14px;box-shadow:0 6px 20px rgba(2,6,23,0.04);
+      margin-bottom:18px;
+    }
+    .logo{
+      width:52px;height:52px;border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-weight:800;font-size:18px;
+    }
+    .logout-btn{
+      padding:8px 16px;
+      background:linear-gradient(90deg,var(--accent),#ff9b4a);
+      color:#fff;border:none;border-radius:10px;
+      cursor:pointer;font-weight:700;
+    }
+    .logout-btn:hover{ opacity:0.9; }
+    .hero{
+      background:linear-gradient(90deg, rgba(2,136,209,0.05), rgba(255,111,0,0.03));
+      padding:18px;border-radius:12px;margin-bottom:18px;
+      box-shadow:0 12px 30px rgba(2,6,23,0.04);
+    }
+    .hero h1{ margin:0; font-size:20px; color:#042a35; }
+    .hero p{ margin:6px 0 0; color:var(--muted); }
+    .grid{
+      display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start;
+    }
+    .panel{
+      background:var(--card);padding:18px;border-radius:12px;
+      box-shadow:0 12px 36px rgba(2,6,23,0.04);
+    }
+    .btn{
+      padding:10px 12px;border-radius:10px;border:none;
+      cursor:pointer;font-weight:800;color:#fff;
+      background:linear-gradient(90deg,var(--accent),#ff9b4a);
+    }
+    .btn.secondary{
+      background:linear-gradient(90deg,var(--accent-2),#06b6d4);
+    }
+    .info-box{
+      background:linear-gradient(180deg,#fff,#fbfeff);
+      padding:12px;border-radius:10px;margin-bottom:12px;
+      border:1px solid #eef6fa;
+    }
+    .info-box strong{ color:#042a35; }
+    .info-box p{ margin:4px 0; color:var(--muted); }
+    footer{ margin-top:18px; color:var(--muted); font-size:13px; text-align:center; }
+    @media (max-width:900px){
+      .grid{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="logo">LH</div>
+        <div>
+          <div style="font-weight:800;color:#042a35">LIFELINE Hospital — Patient</div>
+          <div style="font-size:13px;color:var(--muted)">Your health records and appointments</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:center;">
+        <div style="color:var(--muted);">👤 <span id="patientName">Patient</span></div>
+        <button class="logout-btn" id="logoutBtn">Logout</button>
+      </div>
+    </div>
+
+    <header class="hero">
+      <h1>Welcome to Your Dashboard</h1>
+      <p>View your appointments and health records.</p>
+    </header>
+
+    <div class="grid">
+      <main class="panel">
+        <h3 style="margin:0 0 12px 0;color:#042a35">Your Appointments</h3>
+        <div id="appointmentsList">
+          <div class="info-box">
+            <p style="margin:0;color:var(--muted);">No upcoming appointments</p>
+          </div>
+        </div>
+
+        <h3 style="margin:18px 0 12px 0;color:#042a35">Health Records</h3>
+        <div id="recordsList">
+          <div class="info-box">
+            <p style="margin:0;color:var(--muted);">No health records available</p>
+          </div>
+        </div>
+      </main>
+
+      <aside class="panel">
+        <h3 style="margin:0 0 12px 0">Quick Actions</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <button class="btn" id="bookAppt">Book Appointment</button>
+          <button class="btn secondary" id="viewRecords">View Full Records</button>
+          <button class="btn">Contact Support</button>
+        </div>
+        <div class="info-box" style="margin-top:16px;">
+          <strong>Support Number</strong>
+          <p>+91 79 8677 2000</p>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      © 2025 LIFELINE Hospital — Patient dashboard.
+    </footer>
+  </div>
+
+  <script>
+    // Check patient access
+    function checkPatientAccess(){
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const userRole = localStorage.getItem('userRole');
+      
+      if(!isLoggedIn || userRole !== 'patient'){
+        alert('Access denied! Please login as Patient first.');
+        window.location.href = 'patient-login.html';
+      }
+    }
+
+    checkPatientAccess();
+
+    // Display patient name
+    const patientName = localStorage.getItem('username') || 'Patient';
+    document.getElementById('patientName').textContent = patientName;
+
+    // Logout
+    document.getElementById('logoutBtn').addEventListener('click', ()=>{
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('userRole');
+      localStorage.removeItem('username');
+      window.location.href = 'login.html';
+    });
+
+    // Demo button actions
+    document.getElementById('bookAppt').addEventListener('click', ()=>{
+      alert('Appointment booking feature coming soon!');
+    });
+
+    document.getElementById('viewRecords').addEventListener('click', ()=>{
+      alert('Full health records view coming soon!');
+    });
+  </script>
+</body>
+</html>

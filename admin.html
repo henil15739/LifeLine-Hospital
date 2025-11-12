@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Panel - LIFELINE Hospital</title>
+  <link rel="stylesheet" href="Style.css">
+  <style>
+    :root{
+      --bg1:#f7f9ff;
+      --accent:#ff6f00;
+      --accent-2:#0288d1;
+      --muted:#56606b;
+      --glass: rgba(255,255,255,0.65);
+      --card:#ffffff;
+      --maxw:1150px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, Arial, sans-serif;
+      background:
+        radial-gradient(600px 220px at 10% 10%, rgba(255,111,0,0.06), transparent 10%),
+        radial-gradient(700px 260px at 90% 90%, rgba(2,136,209,0.04), transparent 8%),
+        linear-gradient(180deg,#f0f7ff,#fbfcff);
+      color:#07212a;
+      padding:28px 16px;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    .wrap{ max-width:var(--maxw); margin:0 auto; }
+
+    .topbar{
+      display:flex;align-items:center;gap:12px;
+      background:linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.9));
+      padding:10px 14px;border-radius:14px;box-shadow:0 6px 20px rgba(2,6,23,0.04);
+      margin-bottom:18px;
+      justify-content:space-between;
+    }
+    .logo{ width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;box-shadow:0 6px 18px rgba(2,6,23,0.06) }
+    .navlinks{ margin-left:12px; display:flex; gap:10px; align-items:center; }
+    .navlinks a{ text-decoration:none; color:var(--muted); font-weight:700; padding:8px 12px; border-radius:10px; }
+    .navlinks a:hover{ background:rgba(2,136,209,0.08); color:var(--accent-2); }
+    .topbar-right{ display:flex; gap:12px; align-items:center; }
+    .user-info{ color:var(--muted); font-size:14px; }
+    .logout-btn{ padding:8px 16px; background:linear-gradient(90deg,#ff6f00,#ff9b4a); color:#fff; border:none; border-radius:10px; cursor:pointer; font-weight:700; }
+    .logout-btn:hover{ opacity:0.9; }
+
+    header.hero{
+      display:flex;align-items:center;gap:12px;justify-content:space-between;
+      background:linear-gradient(90deg, rgba(2,136,209,0.05), rgba(255,111,0,0.03));
+      padding:18px;border-radius:12px;margin-bottom:18px;
+      box-shadow:0 12px 30px rgba(2,6,23,0.04);
+    }
+    .hero-left h1{ margin:0; font-size:20px; color:#042a35; }
+    .hero-left p{ margin:6px 0 0; color:var(--muted); }
+
+    .grid{
+      display:grid; grid-template-columns: 1fr 360px; gap:18px; align-items:start;
+    }
+
+    .panel{
+      background:var(--card); padding:18px; border-radius:12px; box-shadow:0 12px 36px rgba(2,6,23,0.04);
+    }
+
+    .stats{
+      display:flex; gap:12px; flex-wrap:wrap;
+    }
+    .stat{
+      flex:1 1 140px; min-width:140px;
+      background:linear-gradient(180deg,#fff,#fbfeff); padding:12px; border-radius:10px;
+      box-shadow:0 8px 20px rgba(2,6,23,0.04); text-align:left;
+    }
+    .stat .num{ font-size:20px; font-weight:800; color:#042a35; }
+    .stat .label{ color:var(--muted); font-weight:700; margin-top:6px; }
+
+    .actions{ display:flex; gap:8px; margin-top:8px; flex-wrap:wrap; }
+    .btn{ padding:10px 12px; border-radius:10px; border:none; cursor:pointer; font-weight:800; color:#fff; background:linear-gradient(90deg,var(--accent),#ff9b4a); }
+    .btn.secondary{ background:linear-gradient(90deg,var(--accent-2),#06b6d4); }
+
+    .recent table{ width:100%; border-collapse:collapse; margin-top:8px; }
+    .recent th, .recent td{ padding:10px; border-bottom:1px solid #eef6fa; text-align:left; font-size:14px; }
+    .recent th{ background:linear-gradient(90deg,var(--accent-2),#06b6d4); color:#fff; font-weight:700; }
+
+    .side-panel .card{ margin-bottom:12px; }
+    .quick-list li{ list-style:none; padding:10px; background:linear-gradient(180deg,#fff,#fbfeff); margin-bottom:8px; border-radius:8px; border:1px solid rgba(2,6,23,0.03); }
+
+    .kpi{
+      display:grid; grid-template-columns: repeat(3,1fr); gap:8px; margin-top:12px;
+    }
+    .kpi .k{ background:linear-gradient(90deg,#fff,#fbfeff); padding:12px; border-radius:8px; text-align:center; }
+    .k .k strong{ display:block; font-size:18px; color:#042a35; }
+
+    footer{ margin-top:18px; color:var(--muted); font-size:13px; text-align:center; }
+
+    @media (max-width:900px){
+      .grid{ grid-template-columns:1fr; }
+      .kpi{ grid-template-columns: repeat(2,1fr); }
+      .navlinks{ display:none; }
+      .topbar-right{ flex-direction:column; gap:8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar" role="navigation" aria-label="Top navigation">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="logo">LH</div>
+        <div>
+          <div style="font-weight:800;color:#042a35">LIFELINE Hospital — Admin</div>
+          <div style="font-size:13px;color:var(--muted)">Manage appointments, patients and billing</div>
+        </div>
+      </div>
+      <nav class="navlinks" aria-label="Main links">
+        <a href="Managment.html">Website</a>
+        <a href="patientrecord.html">Patients</a>
+        <a href="billing2.html">Billing</a>
+        <a href="reports.html">Reports</a>
+      </nav>
+      <div class="topbar-right">
+        <div class="user-info">👤 <span id="adminName">Admin</span></div>
+        <button class="logout-btn" id="logoutBtn">Logout</button>
+      </div>
+    </div>
+
+    <header class="hero" role="banner">
+      <div class="hero-left">
+        <h1>Admin Dashboard</h1>
+        <p>Overview of today's operations and quick actions.</p>
+      </div>
+      <div style="text-align:right;color:var(--muted)">
+        <div style="font-weight:700">Support</div>
+        <div style="font-size:13px">+91 79 8677 2000</div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <main class="panel" aria-label="Main admin panel">
+        <section aria-labelledby="quick-stats">
+          <h3 id="quick-stats" style="margin:0 0 12px 0;color:#042a35">Quick statistics</h3>
+          <div class="stats" id="stats">
+            <div class="stat">
+              <div class="num" id="apptsToday">--</div>
+              <div class="label">Appointments Today</div>
+            </div>
+            <div class="stat">
+              <div class="num" id="totalPatients">--</div>
+              <div class="label">Total Patients</div>
+            </div>
+            <div class="stat">
+              <div class="num" id="pendingBills">--</div>
+              <div class="label">Pending Bills</div>
+            </div>
+            <div class="stat">
+              <div class="num" id="activeStaff">--</div>
+              <div class="label">Active Staff</div>
+            </div>
+          </div>
+          <div class="actions" style="margin-top:14px">
+            <button class="btn" id="createReport">Generate Report</button>
+            <button class="btn secondary" id="exportData">Export Data</button>
+            <button class="btn" id="openApprovals">Approve Appointments</button>
+          </div>
+        </section>
+
+        <section style="margin-top:18px">
+          <h3 style="margin:0 0 12px 0;color:#042a35">Recent Appointments</h3>
+          <div class="recent">
+            <table>
+              <thead>
+                <tr><th>Patient</th><th>Dept</th><th>Time</th><th>Status</th></tr>
+              </thead>
+              <tbody id="recentBody">
+                <tr><td colspan="4" style="text-align:center;color:var(--muted)">No appointments yet</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section style="margin-top:18px">
+          <h3 style="margin:0 0 12px 0;color:#042a35">Latest Activity</h3>
+          <ul class="quick-list" id="activityList">
+            <li>No recent activity</li>
+          </ul>
+        </section>
+      </main>
+
+      <aside class="side-panel">
+        <div class="card panel">
+          <h3 style="margin:0 0 8px 0">Create Quick Bill</h3>
+          <div style="display:flex;gap:8px;flex-direction:column">
+            <input id="qbPatient" placeholder="Patient name" style="padding:10px;border-radius:8px;border:1px solid #eef6fa">
+            <input id="qbAmount" placeholder="Amount (₹)" type="number" style="padding:10px;border-radius:8px;border:1px solid #eef6fa">
+            <button class="btn" id="qbAdd">Create & Save</button>
+          </div>
+          <small style="color:var(--muted); margin-top:8px; display:block">Saves to local storage for demo.</small>
+        </div>
+
+        <div class="card panel">
+          <h3 style="margin:0 0 8px 0">System KPIs</h3>
+          <div class="kpi">
+            <div class="k"><div style="color:var(--muted)">Bed Occupancy</div><strong id="k1">--%</strong></div>
+            <div class="k"><div style="color:var(--muted)">ER Wait</div><strong id="k2">-- min</strong></div>
+            <div class="k"><div style="color:var(--muted)">Avg Stay</div><strong id="k3">-- days</strong></div>
+          </div>
+        </div>
+
+        <div class="card panel">
+          <h3 style="margin:0 0 8px 0">Quick Links</h3>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <a class="btn secondary" href="patientrecord.html">Open Patients</a>
+            <a class="btn" href="billing2.html">Open Billing</a>
+            <a class="btn secondary" href="Managment.html">Edit Website</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer role="contentinfo">
+      © 2025 LIFELINE Hospital — Admin dashboard. Data shown is demo/local.
+    </footer>
+  </div>
+
+  <script>
+    // Check authentication on page load
+    function checkAdminAccess(){
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const userRole = localStorage.getItem('userRole');
+      
+      if(!isLoggedIn || userRole !== 'admin'){
+        alert('Access denied! Please login as Admin first.');
+        window.location.href = 'admin-login.html';
+      }
+    }
+
+    // Call check at start
+    checkAdminAccess();
+
+    // Display username
+    const username = localStorage.getItem('username') || 'Admin';
+    document.getElementById('adminName').textContent = username;
+
+    // Logout functionality
+    document.getElementById('logoutBtn').addEventListener('click', ()=>{
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('userRole');
+      localStorage.removeItem('username');
+      window.location.href = 'login.html';
+    });
+
+    const apptsTodayEl = document.getElementById('apptsToday');
+    const totalPatientsEl = document.getElementById('totalPatients');
+    const pendingBillsEl = document.getElementById('pendingBills');
+    const activeStaffEl = document.getElementById('activeStaff');
+    const recentBody = document.getElementById('recentBody');
+    const activityList = document.getElementById('activityList');
+
+    // load demo values from localStorage if available
+    const demo = JSON.parse(localStorage.getItem('adminDemo') || '{}');
+    const stats = demo.stats || { appts: 18, patients: 1240, bills: 6, staff: 78, kpis:{b:78,er:12,avg:3} };
+    const recent = demo.recent || [
+      {name:'Ramesh K.', dept:'Cardiology', time:'09:30', status:'Checked-in'},
+      {name:'Sonal P.', dept:'ENT', time:'10:00', status:'Pending'}
+    ];
+    const activity = demo.activity || ['Imported patient list','Saved bill INV1001'];
+
+    function renderStats(){
+      apptsTodayEl.textContent = stats.appts;
+      totalPatientsEl.textContent = stats.patients;
+      pendingBillsEl.textContent = stats.bills;
+      activeStaffEl.textContent = stats.staff;
+      document.getElementById('k1').textContent = stats.kpis.b + '%';
+      document.getElementById('k2').textContent = stats.kpis.er + ' min';
+      document.getElementById('k3').textContent = stats.kpis.avg + ' days';
+
+      recentBody.innerHTML = '';
+      if (!recent.length) {
+        recentBody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--muted)">No appointments yet</td></tr>';
+      } else {
+        recent.forEach(r=>{
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${r.name}</td><td>${r.dept}</td><td>${r.time}</td><td>${r.status}</td>`;
+          recentBody.appendChild(tr);
+        });
+      }
+
+      activityList.innerHTML = '';
+      activity.forEach(a=>{
+        const li = document.createElement('li');
+        li.textContent = a;
+        activityList.appendChild(li);
+      });
+    }
+
+    // quick bill creation
+    document.getElementById('qbAdd').addEventListener('click', ()=>{
+      const p = document.getElementById('qbPatient').value.trim();
+      const amt = parseFloat(document.getElementById('qbAmount').value);
+      if(!p || !isFinite(amt)) { alert('Enter patient and amount'); return; }
+      const bills = JSON.parse(localStorage.getItem('demoBills') || '[]');
+      bills.push({ patient:p, amount:amt, created:new Date().toISOString() });
+      localStorage.setItem('demoBills', JSON.stringify(bills));
+      activity.unshift(`Quick bill saved for ${p} (₹${amt})`);
+      if (activity.length>6) activity.pop();
+      renderStats();
+      alert('Quick bill saved (local).');
+      document.getElementById('qbPatient').value=''; document.getElementById('qbAmount').value='';
+    });
+
+    // demo buttons
+    document.getElementById('createReport').addEventListener('click', ()=> alert('Report generation started (demo)'));
+    document.getElementById('exportData').addEventListener('click', ()=> alert('Exporting data (demo)'));
+    document.getElementById('openApprovals').addEventListener('click', ()=> location.href='approval.html');
+
+    renderStats();
+  </script>
+</body>
+</html>

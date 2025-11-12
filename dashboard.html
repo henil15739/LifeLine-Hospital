@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Hospital Management</title>
+  <link rel="stylesheet" href="Style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(120deg, #fcb69f 0%, #a1c4fd 100%);
+      min-height: 100vh;
+      animation: bgmove 12s ease-in-out infinite;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    @keyframes bgmove {
+      0% {background: linear-gradient(120deg, #fcb69f 0%, #a1c4fd 100%);}
+      50% {background: linear-gradient(120deg, #a1c4fd 0%, #fcb69f 100%);}
+      100% {background: linear-gradient(120deg, #fcb69f 0%, #a1c4fd 100%);}
+    }
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 40px auto 0 auto;
+      background: rgba(255,255,255,0.8);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+      padding: 36px 28px 28px 28px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 1.2s;
+      flex: 1 0 auto;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .dashboard-header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 18px;
+      animation: slideDown 1s;
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .dashboard-header img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px #0288d133;
+      background: #fff;
+    }
+    .dashboard-header .welcome {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: #0288d1;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px #0288d133;
+    }
+    .quick-stats {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeIn 1.5s;
+    }
+    .stat-card {
+      background: linear-gradient(120deg, #ffecd2 0%, #fcb69f 100%);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(2,136,209,0.10);
+      padding: 24px 32px;
+      min-width: 200px;
+      text-align: center;
+      font-weight: 700;
+      color: #ff6f00;
+      font-size: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: popIn 0.8s;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .stat-card:hover {
+      transform: scale(1.05) translateY(-4px);
+      box-shadow: 0 8px 32px rgba(2,136,209,0.18);
+    }
+    .stat-icon {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+      color: #0288d1;
+      animation: bounce 1.5s infinite alternate;
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.7);}
+      to { opacity: 1; transform: scale(1);}
+    }
+    @keyframes bounce {
+      from { transform: translateY(0);}
+      to { transform: translateY(-8px);}
+    }
+    .dashboard-sections {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      margin-bottom: 32px;
+    }
+    .section-card {
+      background: rgba(255,255,255,0.95);
+      border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      padding: 28px 22px 22px 22px;
+      animation: fadeIn 1.2s;
+      transition: box-shadow 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .section-card:hover {
+      box-shadow: 0 8px 32px rgba(2,136,209,0.13);
+      transform: translateY(-4px) scale(1.02);
+    }
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #0288d1;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title i {
+      font-size: 1.3rem;
+      color: #ff6f00;
+    }
+    .section-content {
+      color: #444;
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+    }
+    .section-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .section-actions a, .section-actions button {
+      background: linear-gradient(90deg, #0288d1 0%, #4fc3f7 100%);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      box-shadow: 0 2px 8px rgba(2,136,209,0.10);
+    }
+    .section-actions a:hover, .section-actions button:hover {
+      background: linear-gradient(90deg, #ff6f00 0%, #ffb347 100%);
+      color: #fff;
+      transform: scale(1.05);
+    }
+    .notifications {
+      background: #fff3e0;
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-bottom: 24px;
+      color: #e65100;
+      font-weight: 600;
+      font-size: 1.08rem;
+      box-shadow: 0 2px 8px rgba(255,111,0,0.08);
+      animation: fadeIn 1.5s;
+    }
+    .quick-actions {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+    .quick-actions a {
+      background: linear-gradient(90deg, #ff6f00 0%, #ffb347 100%);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      box-shadow: 0 2px 8px rgba(255,111,0,0.12);
+      transition: background 0.2s, transform 0.2s;
+      border: none;
+      outline: none;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+    .quick-actions a:hover {
+      background: linear-gradient(90deg, #0288d1 0%, #4fc3f7 100%);
+      color: #fff;
+      transform: scale(1.05);
+    }
+    .profile-logout {
+      display: flex;
+      justify-content: flex-end;
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .profile-logout a {
+      background: #fff;
+      color: #0288d1;
+      border: 1px solid #0288d1;
+      padding: 8px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .profile-logout a:hover {
+      background: #0288d1;
+      color: #fff;
+    }
+    .footer {
+      background-color: #121212;
+      color: #f3f3c3;
+      padding: 40px 20px 20px;
+      margin-top: 40px;
+      box-sizing: border-box;
+      width: 100%;
+      top: 1200px;
+      border-radius: 0 0 18px 18px;
+      box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+      flex-shrink: 0;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 30px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .footer-col {
+      flex: 1;
+      min-width: 220px;
+    }
+    .footer-col h4 {
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .footer-col ul {
+      list-style: none;
+      padding: 0;
+    }
+    .footer-col ul li {
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .footer-col ul li:hover {
+      color: #ffffff;
+      transform: translateX(5px);
+    }
+    .footer-col p, .footer-col a {
+      margin: 8px 0;
+      color: #ccc;
+      text-decoration: none;
+    }
+    .footer-col a:hover {
+      color: #fff;
+    }
+    .footer-bottom {
+      text-align: center;
+      font-size: 13px;
+      color: #aaa;
+      margin-top: 30px;
+      border-top: 1px solid #333;
+      padding-top: 10px;
+    }
+    .fab {
+      margin-right: 8px;
+      color: #f3f3c3;
+    }
+    @media (max-width: 900px) {
+      .controls {
+        flex-direction: column;
+        align-items: center;
+      }
+      .footer-col {
+        width: 90%;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      .footer-bottom {
+        font-size: 0.9rem;
+        text-align: center;
+      }
+    }
+    @media (max-width: 600px) {
+      .footer {
+        padding: 24px 6px 10px;
+      }
+      .footer-col {
+        min-width: 160px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <img src="pic.jpg" alt="Hospital Logo">
+      <div class="welcome">Welcome to LIFELINE Hospital Dashboard</div>
+    </div>
+    <div class="quick-stats">
+      <div class="stat-card"><span class="stat-icon"><i class="fas fa-user-injured"></i></span>Total Patients<br><span id="stat-patients">--</span></div>
+      <div class="stat-card"><span class="stat-icon"><i class="fas fa-calendar-check"></i></span>Today's Appointments<br><span id="stat-appointments">--</span></div>
+      <div class="stat-card"><span class="stat-icon"><i class="fas fa-file-invoice-dollar"></i></span>Pending Bills<br><span id="stat-bills">--</span></div>
+      <div class="stat-card"><span class="stat-icon"><i class="fas fa-user-md"></i></span>Active Staff<br><span id="stat-staff">--</span></div>
+    </div>
+    <div class="notifications">
+      <i class="fas fa-bell"></i> New appointment requests and payment reminders will appear here.
+    </div>
+    <div class="quick-actions">
+      <a href="patientrecord.html"><i class="fas fa-user-plus"></i> Add Patient</a>
+      <a href="appoinment.html"><i class="fas fa-calendar-plus"></i> Schedule Appointment</a>
+      <a href="billing2.html"><i class="fas fa-file-invoice"></i> Generate Bill</a>
+      <a href="approval.html"><i class="fas fa-check-circle"></i> Approve Appointments</a>
+    </div>
+    <div class="dashboard-sections">
+      <div class="section-card">
+        <div class="section-title"><i class="fas fa-users"></i> Patient Management</div>
+        <div class="section-content">
+          Add, view, edit, or delete patient records. Search and filter patients easily.
+        </div>
+        <div class="section-actions">
+          <a href="patientrecord.html">Manage Patients</a>
+        </div>
+      </div>
+      <div class="section-card">
+        <div class="section-title"><i class="fas fa-calendar-alt"></i> Appointments</div>
+        <div class="section-content">
+          View, approve, or reject appointment requests. See upcoming and past appointments.
+        </div>
+        <div class="section-actions">
+          <a href="appoinment.html">View Appointments</a>
+          <a href="approval.html">Approve/Reject</a>
+        </div>
+      </div>
+      <div class="section-card">
+        <div class="section-title"><i class="fas fa-file-invoice-dollar"></i> Billing & Payments</div>
+        <div class="section-content">
+          Generate and view patient bills. Check payment status and download bills.
+        </div>
+        <div class="section-actions">
+          <a href="billing2.html">Billing</a>
+        </div>
+      </div>
+      <div class="section-card">
+        <div class="section-title"><i class="fas fa-user-md"></i> Staff Management</div>
+        <div class="section-content">
+          Add, view, edit, or delete staff details. Manage staff roles and schedules.
+        </div>
+        <div class="section-actions">
+          <a href="staff-management.html">Manage Staff</a>
+        </div>
+      </div>
+      <div class="section-card">
+        <div class="section-title"><i class="fas fa-chart-bar"></i> Reports & Analytics</div>
+        <div class="section-content">
+          Visual charts for patient inflow, revenue, and appointment trends. Download reports.
+        </div>
+        <div class="section-actions">
+          <a href="reports.html">View Reports</a>
+        </div>
+      </div>
+      <div class="section-card">
+        <div class="section-title"><i class="fas fa-cogs"></i> Settings</div>
+        <div class="section-content">
+          Manage hospital services, user roles, and website settings.
+        </div>
+        <div class="section-actions">
+          <a href="#">Settings</a>
+        </div>
+      </div>
+    </div>
+    <div class="profile-logout">
+      <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+      <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </div>
+  <script>
+    // Example: Animate stats with dummy data (replace with real data as needed)
+    setTimeout(() => {
+      document.getElementById('stat-patients').textContent = '1200';
+      document.getElementById('stat-appointments').textContent = '18';
+      document.getElementById('stat-bills').textContent = '5';
+      document.getElementById('stat-staff').textContent = '42';
+    }, 800);
+  </script>
+  <footer class="footer">
+    <div class="controls">
+      <div class="footer-col">
+        <h4>Important Links</h4>
+        <ul>
+          <li>Our Doctors</li>
+          <li>About Us</li>
+          <li>LIFELINE Amdavad Marathon</li>
+          <li>Patient Speaks</li>
+          <li>Women & Child Care</li>
+          <li>LIFELINE City Centre</li>
+          <li>Quality Indicators</li>
+          <li>LIFELINE Institutes of Allied Health Sciences</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>LIFELINE Hospital</h4>
+        <p>Vaishnodevi Circle, SG Highway,<br>Ahmedabad - 382421</p>
+        <p>📞 +91 79 8677 2000</p>
+           <p>📧 contact@LIFELINEHospital.co.in</p>
+        <p><a href="#">Get Direction</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 LIFELINE Hospital. All rights reserved.        
+    </div>
+  </footer>
+</body>
+</html>                      

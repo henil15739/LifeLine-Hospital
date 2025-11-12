@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Health Check-up Packages - LIFELINE Hospital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Simple, easy CSS with short comments so you can understand */
+    :root{
+      --accent:#e67e22;      /* main color */
+      --muted:#6b7280;       /* secondary text */
+      --bg:#f3f6f9;          /* page background */
+      --card:#ffffff;        /* card background */
+      --maxw:1100px;         /* content width */
+      --shadow: 0 8px 28px rgba(2,6,23,0.06);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Inter", Arial, sans-serif;
+      background: linear-gradient(180deg, #eaf2ff 0%, var(--bg) 100%);
+      color:#222;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    /* HERO / banner */
+    .hero{
+      height:220px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:#fff;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.18)),
+        url('banner.jpg') center/cover no-repeat;
+      border-bottom-left-radius:12px;
+      border-bottom-right-radius:12px;
+      padding:16px;
+    }
+    /* If you don't have banner.jpg, hero falls back to this color */
+    .hero.no-image{ 
+      background: linear-gradient(90deg,#7771f1,#06b6d4); 
+    }
+
+    .hero h1{ 
+      margin:0; 
+      font-size:clamp(20px,3vw,34px); 
+      font-weight:700; 
+      letter-spacing:0.3px; 
+    }
+
+    /* central wrapper (overlaps hero for card look) */
+    .wrap{
+      max-width:var(--maxw);
+      margin:-38px auto 48px;
+      padding:0 16px;
+    }
+
+    /* breadcrumb */
+    .breadcrumb{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      background:rgba(255,255,255,0.95);
+      padding:8px 12px;
+      border-radius:10px;
+      color:var(--muted);
+      font-weight:600;
+      box-shadow:0 6px 20px rgba(16,24,40,0.04);
+      margin-bottom:16px;
+    }
+    .breadcrumb a{ 
+      color:var(--accent); 
+      text-decoration:none; 
+      font-weight:700; 
+    }
+    .chev{ 
+      color:#9ca3af; 
+      user-select:none 
+    
+    }
+
+    /* main card */
+    .card{
+      background:var(--card);
+      padding:22px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+    }
+    h2{ 
+      color:var(--accent); 
+      margin:0 0 12px 0; 
+      font-size:20px; 
+    }
+    p{ 
+      margin:0 0 12px 0;
+       line-height:1.6; 
+       color:#374151; 
+      }
+
+    /* packages grid - simple and responsive */
+    .packages{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:14px;
+      margin-top:14px;
+    }
+    .pkg{
+      background:linear-gradient(180deg,#fff,#fbfcff);
+      padding:14px;
+      border-radius:10px;
+      border:1px solid rgba(15,23,42,0.04);
+      box-shadow:0 6px 14px rgba(15,23,42,0.04);
+      min-width:220px;
+    }
+    .pkg h3{
+       margin:0 0 8px 0; 
+       font-size:16px; 
+       color:#071133; 
+      }
+    .price{ 
+      color:var(--accent); 
+      font-weight:700; 
+      margin-bottom:8px; 
+    }
+    .pkg ul{ margin:0; 
+      padding-left:18px; 
+      color:#475569; 
+      font-size:14px;
+     }
+    .pkg button{
+      margin-top:10px; 
+      background:var(--accent); 
+      color:#fff; 
+      border:none;
+      padding:8px 12px; 
+      border-radius:8px; 
+      cursor:pointer; 
+      font-weight:700;
+    }
+    .pkg button:hover{ 
+      filter:brightness(.95); 
+      transform:translateY(-2px); 
+    }
+
+    /* guidelines section */
+    .guidelines{
+      margin-top:18px;
+      background:var(--card);
+      padding:18px;
+      border-radius:10px;
+      box-shadow:0 8px 20px rgba(2,6,23,0.04);
+    }
+    .guidelines h3{ 
+      margin:0 0 8px 0; 
+      color:var(--accent) 
+    }
+
+    /* responsive small screens */
+    @media (max-width:600px){
+      .wrap{ 
+        margin-top:-20px; 
+        padding:0 12px; 
+      }
+      .hero{ 
+        height:160px 
+      }
+      .breadcrumb{ 
+        width:100%; 
+        justify-content:center 
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO: if you want a different image, put banner.jpg in the same folder -->
+  <header id="hero" class="hero">
+    <h1>Health Check-up Packages</h1>
+  </header>
+
+  <main class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="Managment.html">Home</a>
+      <span class="chev">›</span>
+      <span>Specialities</span>
+      <span class="chev">›</span>
+      <strong style="color:#111; font-weight:700;">Health Check-up Packages</strong>
+    </nav>
+
+    <section class="card" aria-labelledby="packages-title">
+      <h2 id="packages-title">Health Check-up Packages</h2>
+
+      <p>At LIFELINE Hospital we promote well‑being. Our affordable health check‑up packages help with early diagnosis and prevention. Select the package that suits your needs and book easily.</p>
+
+      <p>Each package includes tests and a consultation. For booking and queries, use the "Book Now" buttons or call our appointments line.</p>
+
+      <div class="packages" aria-live="polite">
+        <article class="pkg">
+          <h3>Basic Health Package</h3>
+          <div class="price">₹799</div>
+          <ul>
+            <li>General Physician Consultation</li>
+            <li>Complete Blood Count (CBC)</li>
+            <li>Random Blood Sugar</li>
+            <li>Blood Pressure Check</li>
+          </ul>
+          <button type="button" onclick="location.href='Managment.html'">Book Now</button>
+        </article>
+
+        <article class="pkg">
+          <h3>Comprehensive Package</h3>
+          <div class="price">₹1,799</div>
+          <ul>
+            <li>All Basic tests</li>
+            <li>Lipid Profile</li>
+            <li>Liver Function Test</li>
+            <li>Thyroid Profile</li>
+          </ul>
+          <button type="button" onclick="location.href='Managment.html'">Book Now</button>
+        </article>
+
+        <article class="pkg">
+          <h3>Senior Citizen Package</h3>
+          <div class="price">₹2,499</div>
+          <ul>
+            <li>Cardiac Risk Assessment</li>
+            <li>ECG</li>
+            <li>Kidney Function Test</li>
+            <li>Specialist Consultation</li>
+          </ul>
+          <button type="button" onclick="location.href='Managment.html'">Book Now</button>
+        </article>
+      </div>
+
+      <div class="guidelines" aria-labelledby="guidelines-title">
+        <h3 id="guidelines-title">Important Guidelines</h3>
+        <ul>
+          <li>Please take a prior appointment. Bring urine/stool containers if required.</li>
+          <li>Plan 4–6 hours for the check-up depending on the package.</li>
+          <li>Confirm fasting requirements with Customer Care (usually 8–12 hours).</li>
+          <li>Wear loose clothing and avoid jewellery. Bring previous medical records.</li>
+          <li>Some tests (e.g. Pap smear) may be available the next day. Inform us if pregnant or menstruating.</li>
+        </ul>
+        <p style="margin-top:12px; font-weight:700;">For Appointments Call: +91 79 6677 0005</p>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    /* If no banner image present, apply a colored background so page still looks good.
+       Put an image file named "banner.jpg" in the same folder to use image background. */
+    (function(){
+      const hero = document.getElementById('hero');
+      const img = new Image();
+      img.src = 'banner.jpg';
+      img.onload = () => { /* image exists — nothing to do, CSS uses it */ };
+      img.onerror = () => { hero.classList.add('no-image'); } /* fallback gradient */
+    })();
+  </script>
+</body>
+</html>

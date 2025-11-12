@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Immigrants Visa Health Checkup - LIFELINE Hospital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Simple, easy-to-read CSS */
+    :root{
+      --accent:#0ea5a4;   /* teal */
+      --accent-2:#06b6d4; /* cyan */
+      --bg1:#e6f7f7;
+      --bg2:#f3f9fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Inter", Arial, sans-serif;
+      background: linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 100%);
+      color:#0f172a;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    /* hero with soft pattern; replace visa-banner.jpg in folder to use image */
+    .hero{
+      height:220px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      text-align:center;
+      padding:16px;
+      background:
+        linear-gradient(180deg, rgba(6,182,212,0.9), rgba(14,165,164,0.85)),
+        url('visa-banner.jpg') center/cover no-repeat;
+      border-bottom-left-radius:12px;
+      border-bottom-right-radius:12px;
+    }
+    .hero.no-image{
+      background: linear-gradient(90deg, rgba(6,182,212,0.95), rgba(14,165,164,0.9));
+    }
+    .hero h1{ 
+      margin:0; 
+      font-size:clamp(20px,3vw,34px); 
+      font-weight:700; 
+      letter-spacing:0.2px; 
+    }
+
+    .wrap{
+      max-width:var(--maxw);
+      margin:-40px auto 48px;
+      padding:0 16px;
+    }
+    .breadcrumb{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      background:rgba(255,255,255,0.95);
+      padding:8px 12px;
+      border-radius:10px;
+      color:var(--muted);
+      font-weight:600;
+      box-shadow:0 6px 20px rgba(16,24,40,0.04);
+      margin-bottom:16px;
+    }
+    .breadcrumb a{ 
+      color:var(--accent); 
+      text-decoration:none;
+      font-weight:700; 
+    }
+    .chev{ 
+      color:#9ca3af; 
+      user-select:none 
+    }
+
+    .card{
+      background:var(--card);
+      padding:22px;
+      border-radius:12px;
+      box-shadow:0 10px 30px rgba(2,6,23,0.06);
+    }
+    h2{ 
+      color:var(--accent); 
+      margin:0 0 12px 0; 
+      font-size:20px 
+    }
+    p{ 
+      margin:0 0 12px 0; 
+      line-height:1.6; 
+      color:#374151 
+    }
+
+    /* two-column layout */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 320px;
+      gap:18px;
+      margin-top:14px;
+    }
+    .info-section{ }
+    .side{
+      background: linear-gradient(180deg,#ffffff,#fbffff);
+      padding:14px;
+      border-radius:10px;
+      border:1px solid rgba(15,23,42,0.04);
+    }
+    .tests ul, .documents ul { 
+      margin:8px 0 0 18px; 
+      color:#475569 
+    }
+    .price{ 
+      font-weight:800; 
+      color:var(--accent-2); 
+      font-size:18px; 
+      margin-top:6px 
+    }
+    .btn{
+      display:inline-block;
+      margin-top:12px;
+      background:var(--accent);
+      color:#fff;
+      padding:10px 14px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    .section-title{ 
+      font-weight:700; 
+      color:#0b3440; 
+      margin:8px 0 8px 0;
+     }
+
+    /* responsive */
+    @media (max-width:900px){
+      .grid{ 
+        grid-template-columns: 1fr; 
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero" id="hero">
+    <h1>Immigrants Visa Health Checkup</h1>
+  </header>
+
+  <main class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="Managment.html">Home</a>
+      <span class="chev">›</span>
+      <span>Specialities</span>
+      <span class="chev">›</span>
+      <strong style="color:#043240; font-weight:700;">Visa Health Checkup</strong>
+    </nav>
+
+    <section class="card" aria-labelledby="visa-title">
+      <h2 id="visa-title">Immigrants Visa Health Checkup</h2>
+      <p>We provide certified medical examinations and reports required for immigration and visa purposes. Fast processing, private consultations and clear documentation for consulates.</p>
+
+      <div class="grid">
+        <div class="info-section">
+          <div class="section-title">What is included</div>
+          <div class="tests">
+            <ul>
+              <li>Medical examination by qualified physician</li>
+              <li>Chest X-Ray (if required)</li>
+              <li>Basic blood tests: CBC, RBS</li>
+              <li>Serology tests (HIV / Hepatitis) when requested</li>
+              <li>Urine analysis and general physical fitness report</li>
+            </ul>
+          </div>
+
+          <div style="margin-top:14px">
+            <div class="section-title">Important notes</div>
+            <p>- Different countries require different tests. Please confirm required checklist before appointment.</p>
+            <p>- Bring original ID and previous medical records if any.</p>
+            <p>- Fasting may be required for some blood tests; confirm at booking.</p>
+          </div>
+
+          <div style="margin-top:14px">
+            <div class="section-title">How to book</div>
+            <p>Click "Book Appointment" or call our appointments line. Carry valid ID on the day of checkup.</p>
+            <a class="btn" href="appoinment.html">Book Appointment</a>
+          </div>
+        </div>
+
+        <aside class="side" aria-labelledby="side-title">
+          <div id="side-title" class="section-title">Fees & Documents</div>
+
+          <div>
+            <strong>Estimated Fee</strong>
+            <div class="price">₹1,999 onwards</div>
+            <small style="color:var(--muted)">Final price depends on tests required by consulate.</small>
+          </div>
+
+          <div style="margin-top:12px">
+            <div class="section-title">Documents to bring</div>
+            <div class="documents">
+              <ul>
+                <li>Passport / Govt ID (original)</li>
+                <li>Recent passport-size photos</li>
+                <li>Previous medical reports (if any)</li>
+                <li>Referral / visa checklist provided by immigration authority</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <div class="section-title">Timings</div>
+            <p>Mon–Sat : 9:00 AM – 5:00 PM</p>
+            <p style="margin-top:8px; font-weight:700;">Call : +91 79 8677 2000</p>
+          </div>
+        </aside>
+      </div>
+
+      <div style="margin-top:18px">
+        <div class="section-title">FAQs</div>
+        <p><strong>Q:</strong> How long for report? <br><strong>A:</strong> Basic reports same day; X-ray/serology may take 24–48 hours.</p>
+        <p style="margin-top:8px"><strong>Q:</strong> Can we translate/attest reports? <br><strong>A:</strong> Yes — request translation or attestation at reception (extra charges may apply).</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // fallback if hero image missing — will apply gradient color
+    (function(){
+      const hero = document.getElementById('hero');
+      const img = new Image();
+      img.src = 'visa-banner.jpg';
+      img.onload = function(){ /* image exists */ };
+      img.onerror = function(){ hero.classList.add('no-image'); };
+    })();
+  </script>
+</body>

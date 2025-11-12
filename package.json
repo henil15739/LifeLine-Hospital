@@ -1,0 +1,25 @@
+{
+  "name": "hospital-management-system",
+  "version": "1.0.0",
+  "description": "A hospital management system for booking and approving appointments.",
+  "main": "src/index.html",
+  "scripts": {
+    "start": "live-server src",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "hospital",
+    "management",
+    "appointments",
+    "booking",
+    "approval"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}

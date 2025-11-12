@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Patient Register - LIFELINE Hospital</title>
+  <style>
+    :root{
+      --accent:#ff6f00;
+      --accent-2:#0288d1;
+      --muted:#56606b;
+      --card:#ffffff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, Arial, sans-serif;
+      background: linear-gradient(135deg, #f0f7ff 0%, #fbfcff 100%);
+      display:flex; align-items:center; justify-content:center;
+      min-height:100vh;
+      padding:20px;
+      -webkit-font-smoothing:antialiased;
+    }
+    .form-container{
+      background:var(--card);
+      padding:40px;
+      border-radius:16px;
+      box-shadow:0 12px 36px rgba(2,6,23,0.1);
+      width:100%;
+      max-width:450px;
+    }
+    .logo-section{
+      text-align:center;
+      margin-bottom:30px;
+    }
+    .logo{
+      width:60px;
+      height:60px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-weight:800;
+      font-size:24px;
+      margin:0 auto 16px;
+      box-shadow:0 6px 18px rgba(2,6,23,0.06);
+    }
+    .logo-section h1{
+      margin:0;
+      font-size:24px;
+      color:#042a35;
+    }
+    .logo-section p{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .form-group{
+      margin-bottom:16px;
+    }
+    label{
+      display:block;
+      margin-bottom:8px;
+      font-weight:700;
+      color:#042a35;
+      font-size:14px;
+    }
+    input, select{
+      width:100%;
+      padding:12px;
+      border:1px solid #eef6fa;
+      border-radius:10px;
+      font-family:inherit;
+      font-size:14px;
+      transition:border-color 0.3s;
+    }
+    input:focus, select:focus{
+      outline:none;
+      border-color:var(--accent-2);
+      box-shadow:0 0 0 3px rgba(2,136,209,0.1);
+    }
+    .btn{
+      width:100%;
+      padding:12px;
+      border-radius:10px;
+      border:none;
+      cursor:pointer;
+      font-weight:800;
+      color:#fff;
+      background:linear-gradient(90deg,var(--accent),#ff9b4a);
+      margin-top:8px;
+      transition:transform 0.2s;
+    }
+    .btn:hover{
+      transform:translateY(-2px);
+    }
+    .link-section{
+      text-align:center;
+      margin-top:16px;
+    }
+    .link-section p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .link-section a{
+      color:var(--accent-2);
+      text-decoration:none;
+      font-weight:700;
+    }
+    .link-section a:hover{
+      text-decoration:underline;
+    }
+    .error{
+      color:#d32f2f;
+      font-size:13px;
+      margin-top:4px;
+    }
+    .success{
+      background:#e8f5e9;
+      border-left:4px solid #4caf50;
+      color:#2e7d32;
+      padding:12px;
+      border-radius:8px;
+      margin-bottom:16px;
+      font-size:13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <div class="logo-section">
+      <div class="logo">LH</div>
+      <h1>Patient Registration</h1>
+      <p>Create your patient account</p>
+    </div>
+
+    <form id="registerForm">
+      <div id="successMsg" class="success" style="display:none;"></div>
+
+      <div class="form-group">
+        <label for="fullname">Full Name:</label>
+        <input type="text" id="fullname" placeholder="Enter full name" required>
+        <div id="nameError" class="error"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" required>
+        <div id="dobError" class="error"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select id="gender" required>
+          <option value="">-- Select --</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+        <div id="genderError" class="error"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Enter email address" required>
+        <div id="emailError" class="error"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" placeholder="Enter phone number" required>
+        <div id="phoneError" class="error"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <input type="text" id="address" placeholder="Enter your address" required>
+        <div id="addressError" class="error"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="patientUsername">Username:</label>
+        <input type="text" id="patientUsername" placeholder="Choose a username" required>
+        <div id="usernameError" class="error"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="patientPassword">Password:</label>
+        <input type="password" id="patientPassword" placeholder="Create a strong password" required>
+        <div id="passwordError" class="error"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+        <div id="confirmError" class="error"></div>
+      </div>
+
+      <button type="submit" class="btn">Register as Patient</button>
+
+      <div class="link-section">
+        <p>Already have an account? <a href="patient-login.html">Login here</a></p>
+        <p><a href="index.html">← Back to Home</a></p>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      
+      const fullname = document.getElementById('fullname').value.trim();
+      const dob = document.getElementById('dob').value;
+      const gender = document.getElementById('gender').value;
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const username = document.getElementById('patientUsername').value.trim();
+      const password = document.getElementById('patientPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      let isValid = true;
+
+      if(!fullname || fullname.length < 3){
+        document.getElementById('nameError').textContent = 'Name must be at least 3 characters';
+        isValid = false;
+      } else {
+        document.getElementById('nameError').textContent = '';
+      }
+
+      if(!dob){
+        document.getElementById('dobError').textContent = 'Date of birth is required';
+        isValid = false;
+      } else {
+        document.getElementById('dobError').textContent = '';
+      }
+
+      if(!gender){
+        document.getElementById('genderError').textContent = 'Gender is required';
+        isValid = false;
+      } else {
+        document.getElementById('genderError').textContent = '';
+      }
+
+      if(!email || !email.includes('@')){
+        document.getElementById('emailError').textContent = 'Enter a valid email';
+        isValid = false;
+      } else {
+        document.getElementById('emailError').textContent = '';
+      }
+
+      if(!phone || phone.length < 10){
+        document.getElementById('phoneError').textContent = 'Enter a valid phone number';
+        isValid = false;
+      } else {
+        document.getElementById('phoneError').textContent = '';
+      }
+
+      if(!address){
+        document.getElementById('addressError').textContent = 'Address is required';
+        isValid = false;
+      } else {
+        document.getElementById('addressError').textContent = '';
+      }
+
+      if(!username || username.length < 4){
+        document.getElementById('usernameError').textContent = 'Username must be at least 4 characters';
+        isValid = false;
+      } else {
+        document.getElementById('usernameError').textContent = '';
+      }
+
+      if(!password || password.length < 6){
+        document.getElementById('passwordError').textContent = 'Password must be at least 6 characters';
+        isValid = false;
+      } else {
+        document.getElementById('passwordError').textContent = '';
+      }
+
+      if(password !== confirmPassword){
+        document.getElementById('confirmError').textContent = 'Passwords do not match';
+        isValid = false;
+      } else {
+        document.getElementById('confirmError').textContent = '';
+      }
+
+      const patients = JSON.parse(localStorage.getItem('patients') || '[]');
+      if(patients.some(p => p.username === username)){
+        document.getElementById('usernameError').textContent = 'Username already exists';
+        isValid = false;
+      }
+
+      if(!isValid) return;
+
+      const newPatient = {
+        id: Date.now(),
+        fullname,
+        dob,
+        gender,
+        email,
+        phone,
+        address,
+        username,
+        password: btoa(password),
+        createdAt: new Date().toISOString()
+      };
+
+      patients.push(newPatient);
+      localStorage.setItem('patients', JSON.stringify(patients));
+
+      document.getElementById('successMsg').textContent = '✓ Registration successful! Redirecting to login...';
+      document.getElementById('successMsg').style.display = 'block';
+      
+      setTimeout(() => {
+        window.location.href = 'patient-login.html';
+      }, 1500);
+    });
+  </script>
+</body>
+</html>

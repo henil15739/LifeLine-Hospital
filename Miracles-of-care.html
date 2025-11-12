@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Miracles of Care - LIFELINE Hospital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#e67e22;
+      --accent-2:#06b6d4;
+      --muted:#6b7280;
+      --bg:#f3f7fb;
+      --card:#ffffff;
+      --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Inter",system-ui,Arial,sans-serif;
+      background:
+        radial-gradient(800px 320px at 10% 10%, rgba(6,182,212,0.06), transparent 8%),
+        radial-gradient(700px 260px at 90% 90%, rgba(230,126,34,0.03), transparent 8%),
+        linear-gradient(180deg,#eef6fb, var(--bg));
+      color:#07212a;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:28px 16px;
+    }
+
+    .wrap{ 
+      max-width:var(--maxw); 
+      margin:0 auto; 
+    }
+
+    /* hero */
+    .hero{
+      background: linear-gradient(180deg, rgba(6,182,212,0.06), rgba(230,126,34,0.03));
+      border-radius:12px;
+      padding:28px;
+      display:flex;
+      gap:20px;
+      align-items:center;
+      box-shadow:0 12px 40px rgba(2,6,23,0.04);
+    }
+    .hero .badge{
+      width:84px; 
+      height:84px;
+       border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex; 
+      align-items:center; 
+      justify-content:center; 
+      color:white; 
+      font-weight:800;
+      font-size:20px;
+      box-shadow:0 8px 24px rgba(14,20,30,0.08);
+    }
+    .hero h1{ 
+      margin:0; 
+      font-size:20px;
+       color:#042a2a; 
+      }
+    .hero p{ 
+      margin:6px 0 0;
+       color:var(--muted); 
+       line-height:1.5; 
+      }
+
+    /* breadcrumb */
+    .breadcrumb{ 
+      margin:16px 0; 
+      display:inline-flex; 
+      gap:8px; 
+      align-items:center; 
+      color:var(--muted); 
+      font-weight:600; 
+    }
+    .breadcrumb a{
+       color:var(--accent); 
+       text-decoration:none; 
+       font-weight:700; 
+      }
+
+    /* main content */
+    .card{
+      background:var(--card);
+      margin-top:8px;
+      padding:22px;
+      border-radius:12px;
+      box-shadow:0 10px 30px rgba(2,6,23,0.05);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 320px;
+      gap:20px;
+      align-items:start;
+    }
+
+    .intro h2{ 
+      color:var(--accent); 
+      margin:0 0 8px 0; 
+    }
+    .intro p{ 
+      color:#254141; 
+      margin:0 0 12px 0; 
+      line-height:1.6; 
+    }
+
+    .highlights{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .hl{
+      background:linear-gradient(180deg,#fff,#fbfdff);
+      border-radius:10px;
+      padding:12px;
+      box-shadow:0 6px 18px rgba(2,6,23,0.04);
+      flex:1 1 140px;
+      min-width:140px;
+      text-align:center;
+    }
+    .hl .icon{ 
+      font-size:22px; 
+      margin-bottom:8px; 
+    }
+    .hl .title{ 
+      font-weight:700; 
+      color:#0b3b3a; 
+      font-size:14px;
+    }
+
+    /* testimonials / story */
+    .story{
+      margin-top:18px;
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+    }
+    .story .img{
+      width:120px; 
+      height:120px;
+      border-radius:10px;
+      background:linear-gradient(135deg,#f3f4f6,#fff); 
+      box-shadow:0 8px 24px rgba(2,6,23,0.04);
+      display:flex;
+      align-items:center;
+      justify-content:center; 
+      color:#0b3b3a; 
+      font-weight:700;
+    }
+    .story .text p{ 
+      margin:0 0 8px 0; 
+      color:#374151; 
+      line-height:1.5; 
+    }
+    .quote{ 
+      font-style:italic; 
+      color:#0b3b3a; 
+      font-weight:600; 
+    }
+
+    /* aside */
+    .side{
+      background:linear-gradient(180deg,#fff,#fbffff);
+      border-radius:10px;
+      padding:16px;
+      border:1px solid rgba(15,23,42,0.04);
+    }
+    .side h3{ 
+      margin:0 0 8px 0; 
+      color:var(--accent); 
+    }
+    .cta{
+      display:block; 
+      margin-top:12px; 
+      text-align:center;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#fff; 
+      padding:10px 12px; 
+      border-radius:10px; 
+      text-decoration:none; 
+      font-weight:800;
+    }
+
+    /* small */
+    @media (max-width:900px){
+      .grid{ 
+        grid-template-columns:1fr; 
+      }
+      .hero{ 
+        flex-direction:column; 
+        align-items:flex-start; 
+        gap:12px; 
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero" role="banner">
+      <div class="badge">MC</div>
+      <div>
+        <h1>Miracles of Care</h1>
+        <p>Real stories of recovery and the clinical excellence behind successful treatments at LIFELINE Hospital.</p>
+      </div>
+      <div style="margin-left:auto; text-align:right; color:var(--muted)">
+        <div style="font-weight:700">Need help?</div>
+        <div style="font-size:13px">Call: +91 79 6677 0005</div>
+      </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="Managment.html">Home</a>
+      <span>›</span>
+      <strong>Miracles of Care</strong>
+    </nav>
+
+    <main class="card" role="main" aria-labelledby="mc-title">
+      <div class="grid">
+        <section class="intro">
+          <h2 id="mc-title">Healing stories and outcomes</h2>
+          <p>At LIFELINE Hospital our multidisciplinary teams combine evidence‑based protocols with compassionate care to deliver outstanding clinical results. Below are representative stories, patient outcomes and the services involved.</p>
+
+          <div class="highlights" aria-hidden="false">
+            <div class="hl"><div class="icon">🩺</div><div class="title">Expert Physicians</div></div>
+            <div class="hl"><div class="icon">🏥</div><div class="title">Advanced Facilities</div></div>
+            <div class="hl"><div class="icon">🫀</div><div class="title">Critical Care</div></div>
+            <div class="hl"><div class="icon">🧪</div><div class="title">Accurate Diagnostics</div></div>
+          </div>
+
+          <div class="story" aria-live="polite">
+            <div class="img">RK</div>
+            <div class="text">
+              <p class="quote">"I came with a critical cardiac condition — the team here saved my life. The care and coordination was exceptional."</p>
+              <p>— Ramesh K., recovered patient. Case: emergency angioplasty, 2025.</p>
+            </div>
+          </div>
+
+          <div style="margin-top:16px">
+            <h3 style="margin:0 0 8px 0; color:#0b3b3a">How we achieve results</h3>
+            <ul style="color:#374151; line-height:1.6; margin:8px 0 0 18px;">
+              <li>Rapid assessment + clear treatment plan by senior consultants.</li>
+              <li>Integrated diagnostics and round‑the‑clock monitoring for complex cases.</li>
+              <li>Rehabilitation and follow‑up planning to restore quality of life.</li>
+            </ul>
+          </div>
+        </section>
+
+        <aside class="side" aria-labelledby="side-title">
+          <h3 id="side-title">Quick links & Contact</h3>
+          <p style="margin:0 0 8px 0; color:var(--muted)">Book a consultation or view related services.</p>
+          <a class="cta" href="appoinment.html">Book Appointment</a>
+          <a class="cta" href="helth.html" style="margin-top:10px; display:block; background:linear-gradient(90deg,#06b6d4,#0ea5a4)">Health Checkup</a>
+          <div style="margin-top:14px; color:var(--muted); font-size:14px">
+            <strong>Address</strong>
+            <p style="margin:6px 0 0;">Vaishnodevi Circle, SG Highway, Ahmedabad</p>
+            <p style="margin-top:8px; font-weight:700;">Call : +91 79 6677 0005</p>
+          </div>
+        </aside>
+      </div>
+
+      <div style="margin-top:18px; color:#254141">
+        <h3 style="margin:0 0 8px 0; color:var(--accent)">More patient stories</h3>
+        <p style="margin:0 0 10px 0; color:var(--muted)">Read a curated set of case studies and testimonials in our patient stories section.</p>
+        <a href="patientrecord.html" style="color:var(--accent-2); font-weight:700; text-decoration:none">View case studies →</a>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

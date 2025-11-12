@@ -1,0 +1,442 @@
+.navbar{
+     background-color: lightskyblue;
+     border-radius: 30px;
+     align-items: center;
+     justify-content: space-between;
+   }
+   .navbar ul{
+    overflow: auto;
+   }
+   .navbar li{
+    float: left;
+    list-style: none;
+    margin: 13px 20px;
+   }
+   .navbar li a{
+    padding: 3px 3px;
+    text-decoration: none;
+    color: black;
+    
+   }
+
+   .navbar li a:hover{
+    color: red ;
+   }
+   .logo{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    float: inline-start;
+   }
+   .maindiv{
+    display: flex;
+    width: 80%;
+    height: 430px;
+    position: absolute;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    background-image: url('web-liver-transplant-banner.jpg');
+    background-size: 100% 100%;
+    box-shadow: 1px 2px 10px 10px black;
+    animation: slider 7s infinite linear;
+   }
+   @keyframes slider{
+    0%{ background-image: url('slider-2.jpg'); background-size: 100% 100%; }
+    35%{ background-image: url('slider-3 (1).webp'); background-size: 100% 100%;}
+    75%{background-image: url('mri-web-banner.jpg');  background-size: 100% 100%;}
+   }
+
+    .banner {
+      display: flex;
+      flex-wrap: wrap;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      position: absolute;
+      top: 90%;
+    }
+    .info {
+      flex: 1;
+      background: #ff6f00;
+       color: white;
+      padding: 30px;
+      
+    }
+    .info h1 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      
+    }
+    .info p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 10px;
+      
+    }
+    .services {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 30px;
+      background: #fff;
+           
+    }
+    .service {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+    }
+ .service img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+    .service h2 {
+      font-size: 18px;
+      color: #333;
+    }
+
+    @media (max-width: 768px) {
+      .banner {
+        flex-direction: column;
+      }
+    }
+
+     .header {
+      text-align: center;
+      padding: 30px;
+      background-color: #fff;
+      
+      position: absolute;
+      top: 140%;
+      left: 22%;
+    
+    }
+
+    .header h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 18px;
+      color: #666;
+    }
+
+
+  .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      justify-content: center;
+      padding: 40px 20px;
+      position: absolute;
+      gap: 30px;
+      width: 80%;
+      margin: 40px auto;
+      top: 155%;
+      left: 8%;
+    }
+
+   .card, .card1, .card2, .card3 {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 25px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+   .container .card:hover,
+   .container .card1:hover,
+   .container .card2:hover,
+   .container .card3:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+    .container .icon {
+      font-size: 45px;
+      margin-bottom: 15px;
+    }
+
+    .container .title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .container .description {
+      font-size: 15px;
+      color: #444;
+    }
+
+     .heading-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    
+    }
+
+    .heading-text {
+      font-size: 36px;
+      font-weight: 900;
+      color: #1c1c1c;
+      text-align: center;
+      top: 238%;
+      position: absolute;
+      width: 100%;
+    }
+
+    @media (max-width: 600px) {
+      .heading-text {
+        font-size: 26px;
+      }
+      .heading-circle {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+      .feature-section {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: stretch;
+       position: absolute;
+       top: 250%;
+       width: 100%;
+    }
+
+    .family {
+      position: relative;
+      background: #fff;
+      overflow: hidden;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .family:hover {
+      transform: scale(1.05);
+    }
+
+    .family img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      transition: 0.3s ease;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .family h3 {
+      font-size: 18px;
+      margin: 0 0 10px;
+      color: #333;
+    }
+
+    .arrow-button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(to right, orange, red);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    .family:hover .arrow-button {
+      background: linear-gradient(to right, red, orange);
+    }
+ 
+.footer {
+  background-color: #121212;
+  color: #f3f3c3;
+  padding: 40px 20px 20px;
+  margin-top: auto;
+  box-sizing: border-box;
+  width: 100%;
+  position: absolute;
+  top: 308%;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+  width: 80%;
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 220px;
+ 
+}
+
+
+.footer-col h4 {
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.footer-col ul li:hover {
+  color: #ffffff;
+  transform: translateX(5px);
+}
+
+.footer-col p, .footer-col a {
+  margin: 8px 0;
+  color: #ccc;
+  text-decoration: none;
+}
+
+.footer-col a:hover {
+  color: #fff;
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 30px;
+  border-top: 1px solid #333;
+  padding-top: 10px;
+}
+
+.fab {
+  margin-right: 8px;
+  color: #f3f3c3;
+}
+@media (max-width: 900px) {
+  .navbar ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+  .navbar ul li {
+    width: 100%;
+    margin: 0;
+  }
+  .navbar .pic {
+    margin-bottom: 10px;
+  }
+  .navbar ul {
+    padding-left: 0;
+  }
+}
+
+
+@media (max-width: 800px) {
+  .banner {
+    flex-direction: column;
+    padding: 20px 10px;
+  }
+  .info {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .services {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .service {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+}
+
+
+@media (max-width: 900px) {
+  .container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .card, .card1, .card2, .card3 {
+    width: 90%;
+    margin: 10px 0;
+  }
+}
+
+
+@media (max-width: 900px) {
+  .feature-section {
+    flex-direction: column;
+    align-items: center;
+  }
+  .family {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+}
+
+
+@media (max-width: 900px) {
+  .controls {
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer-col {
+    width: 90%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .footer-bottom {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+}
+@media (max-width: 600px) {
+  h1, .header h1 {
+    font-size: 1.3rem;
+  }
+  .banner h1 {
+    font-size: 1.1rem;
+  }
+  .container, .feature-section, .controls {
+    padding: 0 4px;
+  }
+  .logo {
+    width: 60px;
+    height: 60px;
+  }
+}

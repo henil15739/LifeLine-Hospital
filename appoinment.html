@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book Appointment - LIFELINE Hospital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#e67e22;
+      --muted:#6b7280;
+      --bg-1:#f6fbff;
+      --bg-2:#eef6f9;
+      --card:#ffffff;
+      --maxw:900px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Inter", Arial, sans-serif;
+      background:
+        radial-gradient(1000px 360px at 10% 10%, rgba(230,126,34,0.06), transparent 8%),
+        radial-gradient(800px 260px at 90% 90%, rgba(6,182,212,0.04), transparent 8%),
+        linear-gradient(180deg,var(--bg-1), var(--bg-2));
+      color:#102027;
+      -webkit-font-smoothing:antialiased;
+      padding:36px 16px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      min-height:100vh;
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--maxw);
+      background:linear-gradient(180deg,#ffffff,#fbfdff);
+      border-radius:14px;
+      box-shadow:0 20px 60px rgba(2,6,23,0.08);
+      overflow:hidden;
+    }
+
+    .hero{
+      padding:28px 24px;
+      background:linear-gradient(90deg, rgba(6,182,212,0.07), rgba(230,126,34,0.04));
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .brand{
+      display:flex; gap:12px; align-items:center;
+    }
+    .logo{ width:52px; height:52px; border-radius:10px; background:linear-gradient(135deg,var(--accent),#06b6d4); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; }
+    .hero h1{ margin:0; font-size:20px; color:#042a2a; }
+    .hero p{ margin:4px 0 0; color:var(--muted); font-size:13px; }
+
+    .card{
+      padding:22px;
+    }
+
+    form { display:grid; gap:12px; }
+    label{ font-size:13px; color:var(--muted); font-weight:600; }
+    input[type="text"], input[type="tel"], input[type="email"], select, textarea{
+      width:100%; padding:10px 12px; border-radius:8px; border:1px solid rgba(15,23,42,0.06);
+      background:#fbfdff; font-size:14px; color:#07212a;
+    }
+    .row{ display:flex; gap:10px; }
+    .row .col{ flex:1; }
+    textarea{ min-height:100px; resize:vertical; }
+
+    .actions{ display:flex; gap:10px; margin-top:6px; }
+    .btn-primary{ background:var(--accent); color:#fff; padding:10px 14px; border-radius:10px; border:none; cursor:pointer; font-weight:700; }
+    .btn-secondary{ background:#eef6f7; color:#064047; padding:10px 12px; border-radius:10px; border:none; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; }
+
+    .note{ font-size:13px; color:var(--muted); margin-top:8px; }
+
+    @media (max-width:700px){
+      .row{ flex-direction:column; }
+      .hero{ flex-direction:column; align-items:flex-start; gap:8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="main">
+    <div class="hero">
+      <div class="brand">
+        <div class="logo">LH</div>
+        <div>
+          <h1>Book Appointment</h1>
+          <p>Quick booking for consultations & tests</p>
+        </div>
+      </div>
+      <div style="text-align:right; color:var(--muted)"><div style="font-weight:700">Need help?</div><div style="font-size:13px">Call: +91 79 6677 0005</div></div>
+    </div>
+
+    <div class="card">
+      <form class="app-form" action="booking.html" method="get" autocomplete="on" aria-label="Appointment booking form">
+        <div class="row">
+          <div class="col">
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" placeholder="Your full name" required>
+          </div>
+          <div class="col">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" placeholder="+91 9XXXXXXXXX" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="email">Email (optional)</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com">
+          </div>
+          <div class="col">
+            <label for="dept">Department / Service</label>
+            <select id="dept" name="dept" required>
+              <option value="">Select service</option>
+              <option>General Consultation</option>
+              <option>Health Checkup</option>
+              <option>Visa Medical</option>
+              <option>Cardiology</option>
+              <option>Laboratory</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="date">Preferred date & time</label>
+        <input id="date" name="date" type="text" placeholder="e.g. 2025-11-10 10:00 AM" required>
+
+        <label for="notes">Notes / Reason</label>
+        <textarea id="notes" name="notes" placeholder="Brief reason for appointment (symptoms, tests needed)"></textarea>
+
+        <div class="actions">
+          <button type="submit" class="btn-primary">Request Appointment</button>
+          <a class="btn-secondary" href="Managment.html">Back to Dashboard</a>
+        </div>
+
+        <div class="note">After submitting you'll receive a confirmation call/SMS from our team to finalise the slot.</div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const phone = document.getElementById('phone');
+      if(!phone) return;
+      phone.addEventListener('focus', ()=> { if(!phone.value) phone.placeholder = '+91 '; });
+    })();
+
+    // Check authentication
+    function checkAccess(){
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      if(!isLoggedIn){
+        window.location.href = 'index.html';
+      }
+    }
+    checkAccess();
+  </script>
+</body>
+</html>

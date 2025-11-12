@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospital Managment System</title>
+  <link rel="stylesheet" href="Style.css">
+  <style>
+    /* Revised navbar styles (flexbox, responsive) */
+    .navbar {
+      position:sticky;
+      top: 12px;
+      z-index: 1000;
+      background-color: #E1F5FE; /* softer blue */
+      border-radius: 30px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:10px 16px;
+      gap:12px;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+    }
+
+    .navbar .nav-left,
+    .navbar .nav-center,
+    .navbar .nav-right{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .navbar .logo {
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      object-fit:cover;
+      display:inline-block;
+      box-shadow:0 4px 12px rgba(2,6,23,0.08);
+      margin-right:6px;
+    }
+
+    .nav-center {
+      flex:1 1 auto;
+      justify-content:center;
+    }
+
+    .nav-center a {
+      margin:0 8px;
+      padding:8px 14px;
+      text-decoration:none;
+      color:#042a35;
+      font-weight:600;
+      border-radius:8px;
+      transition:background 0.18s,color 0.18s;
+    }
+
+    .nav-center a:hover{
+      background:#0288d1;
+      color:#fff;
+    }
+
+    .nav-right {
+      gap:10px;
+    }
+
+    .user-info { color:#042a35; font-weight:700; font-size:14px; }
+
+    .logout-btn{
+      padding:8px 12px;
+      border-radius:8px;
+      border:none;
+      cursor:pointer;
+      font-weight:700;
+      background:linear-gradient(90deg,#ff6f00,#ff9b4a);
+      color:#fff;
+    }
+
+    /* admin-only links hidden by default; shown by JS via .visible */
+    .admin-only { display:none; }
+    .admin-only.visible { display:inline-block; }
+
+    /* Mobile adjustments */
+    @media (max-width:800px){
+      .nav-center { justify-content:flex-start; gap:6px; overflow:auto; padding-bottom:6px; }
+      .nav-center a{ white-space:nowrap; }
+      .navbar{ padding:10px; }
+      .nav-right { gap:6px; }
+    }
+
+    .services {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+    .pic {
+      display: flex;
+      align-items: center;
+      margin-right: 10px;
+    }
+    .admin-only {
+      display: none;
+    }
+    .admin-only.visible {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Revised, semantic navbar -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+      <div class="nav-left">
+        <a href="Managment.html" aria-label="LIFELINE Home">
+          <img src="pic.jpg" alt="LIFELINE logo" class="logo">
+        </a>
+        <div style="font-weight:800;color:#042a35">LIFELINE Hospital</div>
+      </div>
+
+      <div class="nav-center" role="menubar" aria-label="Primary links">
+        <a href="Managment.html" role="menuitem">Home</a>
+        <a href="patientrecord.html" role="menuitem">Patient Record</a>
+        <a href="appoinment.html" role="menuitem">Appointment</a>
+        <a href="billing2.html" role="menuitem">Billing</a>
+        <a href="admin.html" id="adminPanelLink" class="admin-only" role="menuitem">Admin Panel</a>
+        <a href="approval.html" id="approveAppointLink" class="admin-only" role="menuitem">Approve Appointments</a>
+      </div>
+
+      <div class="nav-right">
+        <div class="user-info" id="userInfo" aria-live="polite"></div>
+        <button class="logout-btn" id="logoutBtn">Logout</button>
+      </div>
+    </nav>
+  </header>
+  <div class="maindiv">
+  </div>
+
+  <div class="banner">
+  <div class="info">
+    <h1>LIFELINE Hospital - Multispeciality Hospital in Ahmedabad</h1>
+    <p>
+      Located at Vaishnodevi Circle, SG Highway, KD Hospital offers state-of-the-art facilities and affordable treatments across 45+ super-specialities.
+    </p>
+    <p>
+      With a 6-acre campus and 300+ beds, the hospital promotes collaboration among specialties for comprehensive patient care under the Shri Harihar Maharaj Charitable Trust.
+    </p>
+  </div>
+  <div class="services">
+    <div class="service">
+      <img src="Health-Checkup.webp" alt="Health Checkup" />
+      <h2><a href="helth.html">Health Checkup</a></h2>
+    </div>
+    <div class="service">
+      <img src="Immigrants-Visa-Health-Checkup.webp" alt="Immigrants Visa Health Checkup" />
+      <h2><a href="Visa-Checkup.html">Immigrants Visa Health Checkup</a></h2>
+    </div>
+  </div>
+</div>
+
+ <div class="header">
+  <h1>We Are a Multispeciality Hospital In Ahmedabad.</h1>
+  <p>Our Services</p>
+</div>
+
+<div class="container">
+  <div class="card">
+    <div class="icon">🩺</div>
+    <div class="title"><a href="Miracles-of-care.html">Miracles of Care</a></div>
+    <div class="description">Remarkable recoveries through compassionate treatment and innovation.</div>
+  </div>
+  <div class="card1">
+    <div class="icon">📖</div>
+    <div class="title"><a href="success-stories.html">Success Stories</a></div>
+    <div class="description">Real patient journeys that inspire hope and healing.</div>
+  </div>
+  <div class="card2">
+    <div class="icon">⚕️</div>
+    <div class="title">Our Speciality</div>
+    <div class="description">Advanced procedures delivered by top specialists in Ahmedabad.</div>
+  </div>
+  <div class="card3">
+    <div class="icon">📋</div>
+    <div class="title">Health Packages</div>
+    <div class="description">Affordable check-ups and diagnostics for every family member.</div>
+  </div>
+</div>
+<div class="heading-container">
+  <div class="heading-circle"></div>
+  <div class="heading-text">Why Prefer LIFELINE Hospital ?</div>
+</div>
+ <div class="feature-section">
+  <div class="family">
+    <img src="Transparent-services.webp" alt="Friendly Staff"/>
+    <div class="card-content">
+      <h3><a href="Transparent-Services-&-Friendly-Staff.html">Transparent Services & Friendly Staff</a></h3>
+      <div class="arrow-button">→</div>
+    </div>
+  </div>
+
+  <div class="family">
+    <img src="Affordable-prices.webp" alt="Health Packages"/>
+    <div class="card-content">
+      <h3>Affordable Prices & Comprehensive Health Check-Up Packages</h3>
+      <div class="arrow-button">→</div>
+    </div>
+  </div>
+
+  <div class="family">
+    <img src="care-facilities.webp" alt="Treatment"/>
+    <div class="card-content">
+      <h3>Timely Diagnosis, Treatment, and Care</h3>
+      <div class="arrow-button">→</div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="controls">
+
+    <div class="footer-col">
+      <h4>Important Links</h4>
+      <ul>
+        <li>Our Doctors</li>
+        <li>About Us</li>
+        <li>LIFELINE Amdavad Marathon</li>
+        <li>Patient Speaks</li>
+        <li>Women & Child Care</li>
+        <li>LIFELINE City Centre</li>
+        <li>Quality Indicators</li>
+        <li>LIFELINE Institutes of Allied Health Sciences</li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>LIFELINE Hospital</h4>
+      <p>Vaishnodevi Circle, SG Highway,<br>Ahmedabad - 382421</p>
+      <p>📞 +91 79 8677 2000</p>
+      <p>📧 contact@LIFELINEHospital.co.in</p>
+      <p><a href="#">Get Direction</a></p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 LIFELINE Hospital is incorporated by SHRI HARIHAR MAHARAJ CHARITABLE TRUST. All Rights Reserved.
+  </div>
+</div>
+
+<script>
+    // Check authentication and show/hide admin links
+    function checkAccess(){
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const userRole = localStorage.getItem('userRole');
+      
+      if(!isLoggedIn){
+        window.location.href = 'index.html';
+        return;
+      }
+
+      const username = localStorage.getItem('username');
+      document.getElementById('userInfo').textContent = `👤 ${username || 'User'}`;
+
+      // Show admin-only links only for admins
+      if(userRole === 'admin'){
+        document.getElementById('adminPanelLink').classList.add('visible');
+        document.getElementById('approveAppointLink').classList.add('visible');
+      } else {
+        document.getElementById('adminPanelLink').classList.remove('visible');
+        document.getElementById('approveAppointLink').classList.remove('visible');
+      }
+    }
+
+    checkAccess();
+
+    // Logout functionality
+    document.getElementById('logoutBtn').addEventListener('click', ()=>{
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('userRole');
+      localStorage.removeItem('username');
+      localStorage.removeItem('adminId');
+      localStorage.removeItem('patientId');
+      localStorage.removeItem('adminData');
+      localStorage.removeItem('patientData');
+      window.location.href = 'index.html';
+    });
+
+    // Sticky navbar animation on scroll
+    window.addEventListener('scroll', function() {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 10) {
+        navbar.classList.add('sticky');
+      } else {
+        navbar.classList.remove('sticky');
+      }
+    });
+  </script>
+</body>
+</html>

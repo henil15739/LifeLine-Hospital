@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Success Stories — LIFELINE Hospital</title>
+  <style>
+    :root{
+      --accent:#0288d1;
+      --muted:#f6f9fb;
+      --card:#ffffff;
+      --text:#222;
+      --radius:12px;
+      --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      font-family: Inter,Segoe UI,Roboto,Arial,sans-serif;
+      margin:0;
+      color:var(--text);background:linear-gradient(180deg,#f3fbff 0%,#fff 60%);
+      -webkit-font-smoothing:antialiased;
+    }
+    /* header/nav */
+    .navbar{
+      max-width:var(--maxw);
+      margin:18px auto;
+      padding:12px 18px;
+      background:var(--card);
+      display:flex;
+      align-items:center;
+      gap:14px;
+      border-radius:30px;
+      box-shadow:0 6px 24px rgba(2,136,209,0.08);
+    }
+    .navbar img.logo{
+      width:48px;
+      height:48px;
+      border-radius:50%
+    }
+    .nav-links{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      margin-left:auto
+    }
+    .nav-links a{
+      color:var(--text);
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:8px;
+      font-weight:600
+    }
+    .nav-links a:hover{
+      background:var(--accent);
+      color:#fff
+    }
+    .container-wide{
+      max-width:var(--maxw);
+      margin:24px auto;
+      padding:0 16px
+    }
+
+    /* hero */
+    .hero{
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:28px;
+      align-items:center;
+      background:linear-gradient(90deg,rgba(2,136,209,0.06),transparent);
+      padding:28px;
+      border-radius:18px
+    }
+    .hero-left h1{
+      margin:0 0 12px;
+      font-size:28px;
+      color:var(--accent)
+    }
+    .hero-left p{
+      margin:0 0 16px;
+      color:#444
+    }
+    .cta{
+      display:inline-block;
+      padding:10px 16px;
+      border-radius:10px;
+      background:var(--accent);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700
+    }
+
+    /* stories grid */
+    .stories{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:18px;
+      margin-top:22px
+    }
+    .story-card{
+      background:var(--card);border-radius:14px;
+      padding:14px;
+      box-shadow:0 8px 20px rgba(11,40,80,0.04);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-height:220px
+    }
+    .story-media{
+      height:130px;
+      border-radius:10px;
+      overflow:hidden;
+      background:#ddd
+    }
+    .story-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block
+    }
+    .story-title{
+      font-weight:700;
+      color:#0b3650
+    }
+    .story-excerpt{
+      color:#556;
+      flex:1
+    }
+    .story-meta{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:13px;
+      color:#777
+    }
+
+    /* featured testimonial */
+    .featured{
+      margin-top:28px;
+      display:flex;
+      gap:18px;
+      align-items:center;
+      background:var(--muted);
+      padding:18px;
+      border-radius:12px
+    }
+    .featured img{
+      width:120px;
+      height:120px;
+      border-radius:12px;
+      object-fit:cover
+    }
+    .featured .text{
+      flex:1
+    }
+    .featured h3{
+      margin:0 0 8px
+    }
+    .featured p{
+      margin:0;
+      color:#444
+    }
+
+    footer{
+      margin-top:28px;
+      padding:18px 0;
+      color:#666;
+      text-align:center;
+      font-size:14px
+    }
+
+    /* responsive */
+    @media (max-width:880px){
+      .hero{
+        grid-template-columns:1fr;
+         text-align:center
+        }
+      .nav-links{
+        display:none
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="container-wide">
+    <nav class="navbar" aria-label="Main navigation">
+      <img src="pic.jpg" alt="LIFELINE logo" class="logo">
+      <div style="font-weight:800;color:var(--text)">LIFELINE Hospital</div>
+      <div class="nav-links">
+        <a href="Managment.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="patientrecord.html">Patient Record</a>
+        <a href="success-stories.html" style="background:var(--accent);color:#fff">Success Stories</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container-wide">
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Real People. Real Recoveries.</h1>
+        <p>Discover inspiring journeys of patients who received life-changing care at LIFELINE Hospital. Each story highlights the team's expertise, human touch, and modern facilities.</p>
+        <a class="cta" href="#stories">Explore Stories</a>
+      </div>
+      <div class="hero-right" aria-hidden="true">
+        <img src="care-facilities.webp" alt="Care" style="width:100%;border-radius:12px;box-shadow:0 10px 30px rgba(2,136,209,0.08)">
+      </div>
+    </section>
+
+    <section id="stories" class="stories" aria-label="Patient success stories">
+      <article class="story-card">
+        <div class="story-media"><img src="image1.jpg" alt="Story 1"></div>
+        <div class="story-title">A Second Chance at Life</div>
+        <div class="story-excerpt">After a complex cardiac surgery, Mr. Patel regained strength and returned to his family. Our cardiology and rehab teams supported every step.</div>
+        <div class="story-meta"><span>Cardiology</span><span>Jan 2024</span></div>
+      </article>
+
+      <article class="story-card">
+        <div class="story-media"><img src="image2.jpg" alt="Story 2"></div>
+        <div class="story-title">Mother and Child — A Happy Ending</div>
+        <div class="story-excerpt">Complications during delivery were handled by our multidisciplinary team leading to a safe delivery and healthy recovery.</div>
+        <div class="story-meta"><span>OB-GYN</span><span>Mar 2024</span></div>
+      </article>
+
+      <article class="story-card">
+        <div class="story-media"><img src="image3.jpg" alt="Story 3"></div>
+        <div class="story-title">Knee Replacement — Back on Their Feet</div>
+        <div class="story-excerpt">Mrs. Desai overcame chronic pain after total knee replacement and physiotherapy, resuming her daily walks.</div>
+        <div class="story-meta"><span>Orthopedics</span><span>Aug 2024</span></div>
+      </article>
+
+      <article class="story-card">
+        <div class="story-media"><img src="image4.jpg" alt="Story 4"></div>
+        <div class="story-title">Stroke Recovery — Renewed Hope</div>
+        <div class="story-excerpt">Rapid intervention and dedicated rehab helped Mr. Rao regain speech and mobility within months.</div>
+        <div class="story-meta"><span>Neurology</span><span>Nov 2023</span></div>
+      </article>
+    </section>
+
+    <section class="featured" aria-labelledby="featured-label">
+      <img src="testimonial.jpg" alt="Patient testimonial">
+      <div class="text">
+        <h3 id="featured-label">Featured Story — The Gupta Family</h3>
+        <p>“The doctors treated my father like family. From diagnosis to recovery, the care was excellent. We’re grateful to the entire LIFELINE team.” — S. Gupta</p>
+      </div>
+    </section>
+
+    <section style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center">
+      <a class="cta" href="appoinment.html">Book a Consultation</a>
+      <a href="Managment.html" style="padding:10px 14px;border-radius:10px;background:#fff;border:1px solid #e3eef9;color:var(--accent);text-decoration:none;font-weight:700">Back to Home</a>
+    </section>
+
+    <footer>
+      © 2025 LIFELINE Hospital — Stories of care and recovery. Contact: contact@LIFELINEHospital.co.in
+    </footer>
+  </main>
+</body>
+</html>

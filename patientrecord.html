@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Patient Records - LIFELINE Hospital</title>
+  <link rel="stylesheet" href="Style.css">
+  <style>
+    :root{
+      --accent:#0288d1;
+      --accent-2:#06b6d4;
+      --muted:#51656a;
+      --bg:#f5f9fc;
+      --card:#ffffff;
+      --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #eef7fb 0%, var(--bg) 100%);
+      color:#0b2b2b;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:18px;
+    }
+
+    /* top navigation (keeps styling similar to your Managment.html) */
+    .navbar{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      background:lightskyblue;
+      padding:10px 16px;
+      border-radius:24px;
+      max-width:var(--maxw);
+      margin:0 auto 18px;
+      box-shadow:0 8px 30px rgba(2,6,23,0.06);
+    }
+    .navbar .logo{ width:48px; height:48px; border-radius:50%; object-fit:cover; }
+    .nav-links{ display:flex; gap:14px; align-items:center; margin-left:8px; flex-wrap:wrap; }
+    .nav-links a{ text-decoration:none; color:#032a2a; font-weight:600; padding:8px 12px; border-radius:8px; }
+    .nav-links a:hover{ background:#0288d1; color:white; }
+
+    .wrap{ max-width:var(--maxw); margin:0 auto; }
+
+    header.hero{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      background:linear-gradient(90deg, rgba(2,136,209,0.06), rgba(6,182,212,0.03));
+      padding:20px;
+      border-radius:12px;
+      margin-bottom:18px;
+      box-shadow:0 12px 30px rgba(2,6,23,0.04);
+    }
+    .hero-left h1{ margin:0; font-size:20px; color:#06343a; }
+    .hero-left p{ margin:6px 0 0; color:var(--muted); }
+    .hero-cta{ text-align:right; color:var(--muted); font-size:13px; }
+
+    .card{
+      background:var(--card);
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 10px 30px rgba(2,6,23,0.04);
+      margin-bottom:18px;
+    }
+
+    .controls-row{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+
+    .form-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .form-row input, .form-row select {
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid #d6e6ef;
+      min-width:160px;
+      font-size:14px;
+      background:#fbfeff;
+    }
+    .form-row .btn{
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#fff;
+      border:none;
+      padding:10px 16px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:700;
+    }
+    .form-row .btn.ghost{
+      background:transparent;
+      color:var(--accent);
+      border:1px solid rgba(2,136,209,0.12);
+    }
+
+    .tools{ display:flex; gap:8px; align-items:center; }
+    .search{
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px solid #d6e6ef;
+      min-width:220px;
+      background:white;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:12px;
+      font-size:14px;
+    }
+    th, td{
+      padding:12px 10px;
+      text-align:left;
+      border-bottom:1px solid #eef6fa;
+    }
+    th{
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:white;
+      font-weight:700;
+      font-size:14px;
+    }
+    tr:hover td{ background:linear-gradient(90deg, #f7fcff, #ffffff); }
+
+    .actions button{
+      padding:6px 10px;
+      border-radius:8px;
+      border:none;
+      cursor:pointer;
+      font-weight:700;
+    }
+    .btn-delete{ background:#ef7560; color:white; }
+    .btn-edit{ background:#0288d1; color:white; margin-right:6px; }
+
+    .empty{
+      padding:24px;
+      text-align:center;
+      color:var(--muted);
+    }
+
+    /* responsive */
+    @media (max-width:900px){
+      .hero{ flex-direction:column; align-items:flex-start; }
+      .form-row{ width:100%; }
+      .search{ width:100%; }
+    }
+
+    /* footer (keeps same content but tightened layout) */
+    .footer{
+      max-width:var(--maxw);
+      margin:28px auto 0;
+      padding:18px;
+      border-radius:10px;
+      background:#08121a;
+      color:#cfeff2;
+      box-shadow:0 8px 30px rgba(2,6,23,0.06);
+    }
+    .footer .cols{ display:flex; gap:24px; flex-wrap:wrap; }
+    .footer h4{ margin:0 0 8px 0; color:#fff; }
+    .footer p, .footer li{ color:#b8d9dd; margin:6px 0; }
+  </style>
+</head>
+<body>
+  <script>
+    // Check authentication
+    function checkAccess(){
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      if(!isLoggedIn){
+        window.location.href = 'index.html';
+      }
+    }
+    checkAccess();
+  </script>
+
+  <nav class="navbar">
+    <img src="pic.jpg" alt="logo" class="logo">
+    <div class="nav-links">
+      <a href="Managment.html">Home</a>
+      <a href="Miracles-of-care.html">Miracles</a>
+      <a href="Transparent-Services-&-Friendly-Staff.html">Services</a>
+      <a href="appoinment.html">Appointment</a>
+      <a href="billing2.html">Billing</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <header class="hero">
+      <div class="hero-left">
+        <h1>Patient Records</h1>
+        <p>Manage patient details, appointments and quick contact from here.</p>
+      </div>
+      <div class="hero-cta">
+        <div style="font-weight:700">Support</div>
+        <div style="font-size:13px">Call: +91 79 8677 2000</div>
+      </div>
+    </header>
+
+    <section class="card" aria-labelledby="records">
+      <div class="controls-row">
+        <div class="form-row">
+          <form id="addPatientForm" autocomplete="off" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <input type="text" id="name" placeholder="Patient Name" required>
+            <input type="number" id="age" placeholder="Age" required min="0">
+            <select id="gender" required>
+              <option value="">Gender</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+            </select>
+            <input type="text" id="disease" placeholder="Disease / Condition" required>
+            <input type="text" id="contact" placeholder="Contact" required>
+            <button class="btn" type="submit">Add</button>
+          </form>
+        </div>
+
+        <div class="tools">
+          <input class="search" id="searchInput" placeholder="Search by name / disease / contact">
+          <button class="btn ghost" id="exportBtn">Export CSV</button>
+          <button class="btn ghost" id="clearAllBtn" title="Clear all records">Clear All</button>
+        </div>
+      </div>
+
+      <div id="tableWrap">
+        <table aria-describedby="records">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Disease</th>
+              <th>Contact</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="patientTableBody">
+            <!-- rows -->
+          </tbody>
+        </table>
+        <div id="emptyState" class="empty" style="display:none">No patient records yet. Add a patient to get started.</div>
+      </div>
+    </section>
+
+    <div class="footer" role="contentinfo">
+      <div class="cols">
+        <div style="flex:1;min-width:220px">
+          <h4>LIFELINE Hospital</h4>
+          <p>Vaishnodevi Circle, SG Highway, Ahmedabad - 382421</p>
+          <p>📞 +91 79 8677 2000</p>
+        </div>
+        <div style="flex:1;min-width:220px">
+          <h4>Quick Links</h4>
+          <ul style="list-style:none;padding:0;margin:0">
+            <li><a href="Managment.html" style="color:#bfeff3;text-decoration:none">Home</a></li>
+            <li><a href="appoinment.html" style="color:#bfeff3;text-decoration:none">Book Appointment</a></li>
+            <li><a href="patientrecord.html" style="color:#bfeff3;text-decoration:none">Patient Records</a></li>
+          </ul>
+        </div>
+        <div style="flex:1;min-width:220px">
+          <h4>Follow</h4>
+          <p>Facebook • Instagram • LinkedIn • YouTube</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('addPatientForm');
+    const tableBody = document.getElementById('patientTableBody');
+    const searchInput = document.getElementById('searchInput');
+    const exportBtn = document.getElementById('exportBtn');
+    const clearAllBtn = document.getElementById('clearAllBtn');
+    const emptyState = document.getElementById('emptyState');
+
+    let patients = JSON.parse(localStorage.getItem('patients') || '[]');
+
+    function save() { localStorage.setItem('patients', JSON.stringify(patients)); }
+
+    function renderTable(filter = '') {
+      tableBody.innerHTML = '';
+      const list = patients.filter(p => {
+        const q = filter.trim().toLowerCase();
+        if (!q) return true;
+        return (p.name + ' ' + p.disease + ' ' + p.contact).toLowerCase().includes(q);
+      });
+
+      if (list.length === 0) {
+        emptyState.style.display = 'block';
+      } else {
+        emptyState.style.display = 'none';
+      }
+
+      list.forEach((patient, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${escapeHtml(patient.name)}</td>
+          <td>${escapeHtml(patient.age)}</td>
+          <td>${escapeHtml(patient.gender)}</td>
+          <td>${escapeHtml(patient.disease)}</td>
+          <td>${escapeHtml(patient.contact)}</td>
+          <td class="actions">
+            <button class="btn-edit" data-idx="${idx}">Edit</button>
+            <button class="btn-delete" data-idx="${idx}">Delete</button>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+
+      // attach handlers
+      document.querySelectorAll('.btn-delete').forEach(btn => {
+        btn.onclick = () => {
+          const idx = Number(btn.getAttribute('data-idx'));
+          if (!confirm('Delete this record?')) return;
+          patients.splice(idx, 1);
+          save();
+          renderTable(searchInput.value);
+        };
+      });
+
+      document.querySelectorAll('.btn-edit').forEach(btn => {
+        btn.onclick = () => {
+          const idx = Number(btn.getAttribute('data-idx'));
+          const p = patients[idx];
+          if (!p) return;
+          // populate form for edit
+          document.getElementById('name').value = p.name;
+          document.getElementById('age').value = p.age;
+          document.getElementById('gender').value = p.gender;
+          document.getElementById('disease').value = p.disease;
+          document.getElementById('contact').value = p.contact;
+          // remove original and save on next submit (simple edit flow)
+          patients.splice(idx, 1);
+          save();
+          renderTable(searchInput.value);
+        };
+      });
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const newPatient = {
+        name: document.getElementById('name').value.trim(),
+        age: document.getElementById('age').value.trim(),
+        gender: document.getElementById('gender').value,
+        disease: document.getElementById('disease').value.trim(),
+        contact: document.getElementById('contact').value.trim()
+      };
+      // basic validation
+      if (!newPatient.name || !newPatient.age || !newPatient.gender || !newPatient.disease) {
+        alert('Please fill required fields.');
+        return;
+      }
+      patients.push(newPatient);
+      save();
+      renderTable(searchInput.value);
+      form.reset();
+    });
+
+    searchInput.addEventListener('input', (e) => {
+      renderTable(e.target.value);
+    });
+
+    exportBtn.addEventListener('click', () => {
+      if (!patients.length) { alert('No records to export'); return; }
+      const csv = [
+        ['Name','Age','Gender','Disease','Contact'],
+        ...patients.map(p => [p.name, p.age, p.gender, p.disease, p.contact])
+      ].map(r => r.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\n');
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'patients.csv';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    clearAllBtn.addEventListener('click', () => {
+      if (!patients.length) return alert('No records to clear');
+      if (!confirm('Clear ALL patient records?')) return;
+      patients = [];
+      save();
+      renderTable();
+    });
+
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]); }
+
+    // initial render
+    renderTable();
+  </script>
+</body>
+</html>

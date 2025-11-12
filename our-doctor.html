@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Our Doctors — LIFELINE Hospital</title>
+  <link rel="stylesheet" href="Style.css">
+  <style>
+    :root{
+      --accent:#0288d1;
+      --brand:#ff6f00;
+      --muted:#56606b;
+      --card:#ffffff;
+      --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+       margin:0; 
+       font-family:Inter, system-ui, Arial, sans-serif;
+      background:linear-gradient(180deg,#f3fbff,#fff); 
+      color:#07212a; padding:20px; -webkit-font-smoothing:antialiased; 
+    }
+    .wrap{ 
+      max-width:var(--maxw);
+       margin:0 auto;
+       }
+    header.nav{ 
+      display:flex; 
+      gap:12px; 
+      align-items:center; 
+      background:rgba(255,255,255,0.9);
+       padding:10px 14px; border-radius:12px; 
+       box-shadow:0 6px 20px rgba(2,6,23,0.04);
+        margin-bottom:18px;
+       }
+    .logo{ 
+      width:56px;
+      height:56px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--brand),var(--accent));
+       display:flex;
+       align-items:center;
+       justify-content:center;
+       color:#fff;
+       font-weight:800 
+      }
+    .navlinks{ 
+      display:flex; 
+      gap:10px; 
+      align-items:center; 
+      margin-left:6px; 
+      flex-wrap:wrap; 
+    }
+    .navlinks a{ 
+      color:var(--muted); 
+      text-decoration:none; 
+      padding:8px 10px; 
+      border-radius:8px; 
+      font-weight:700; 
+    }
+    .navlinks a:hover{ 
+      background:var(--accent); 
+      color:#fff; 
+    }
+    .page-head{ 
+      display:flex; 
+      justify-content:space-between; 
+      align-items:center; 
+      gap:12px; 
+      margin-bottom:16px; 
+    }
+    .page-head h1{ 
+      margin:0; 
+      font-size:22px; 
+      color:#042a35; 
+    }
+
+    .controls{ 
+      display:flex; 
+      gap:10px; 
+      align-items:center; 
+    }
+    .search{ 
+      padding:10px 12px;
+       border-radius:10px; 
+       border:1px solid #e6f2f8; 
+       min-width:220px; 
+      }
+    .filters select{ 
+      padding:10px 12px; 
+      border-radius:10px; 
+      border:1px solid #e6f2f8; 
+    }
+    .grid{ 
+      display:grid; 
+      grid-template-columns:repeat(3,1fr); 
+      gap:16px; 
+      margin-top:12px; 
+    }
+    .card{ 
+      background:var(--card); 
+      border-radius:12px;
+       padding:14px; 
+       box-shadow:0 12px 30px rgba(2,6,23,0.04); 
+       display:flex;
+        gap:12px;
+         align-items:flex-start; 
+        }
+    .avatar{
+       width:84px; 
+       height:84px; 
+       border-radius:10px; 
+       object-fit:cover; 
+       flex-shrink:0; 
+       background:#f3f7fb; 
+       display:inline-block; 
+      }
+    .info{ 
+      flex:1; 
+    }
+    .info h3{ 
+      margin:0; 
+      font-size:16px; 
+      color:#042a35; 
+    }
+    .meta{ 
+      color:var(--muted); 
+      font-size:13px;
+       margin:6px 0; 
+      }
+    .tags{ 
+      display:flex;
+       gap:8px; 
+       flex-wrap:wrap; 
+       margin-top:8px; 
+      }
+    .tag{ 
+      background:linear-gradient(90deg,var(--accent),#06b6d4); 
+      color:#fff; 
+      padding:6px 10px; 
+      border-radius:999px; 
+      font-weight:700; 
+      font-size:12px; 
+    }
+    .contact{ 
+      display:flex; 
+      gap:8px; 
+      margin-top:10px; 
+      align-items:center; 
+    }
+    .contact a{ 
+      text-decoration:none; 
+      padding:8px 10px; 
+      border-radius:8px; 
+      background:#eef9ff; 
+      color:var(--accent); 
+      font-weight:700; 
+      font-size:13px; 
+    }
+    .empty{ 
+      text-align:center; 
+      color:var(--muted); 
+      padding:36px 12px; 
+      background:#fff; 
+      border-radius:12px; 
+      box-shadow:0 6px 18px rgba(2,6,23,0.03); 
+    }
+    @media (max-width:1000px){ .grid{ grid-template-columns:repeat(2,1fr); } .search{ min-width:160px; } }
+    @media (max-width:640px){ .grid{ grid-template-columns:1fr; } .page-head{ flex-direction:column; align-items:flex-start; gap:8px; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="nav" role="navigation" aria-label="Top navigation">
+      <div class="logo">LH</div>
+      <nav class="navlinks" aria-label="Main links">
+        <a href="Managment.html">Home</a>
+        <a href="patientrecord.html">Patients</a>
+        <a href="appoinment.html">Appointments</a>
+        <a href="billing2.html">Billing</a>
+        <a href="adminpanal.html">Admin</a>
+      </nav>
+    </header>
+
+    <div class="page-head">
+      <h1>Our Doctors</h1>
+      <div class="controls">
+        <input id="search" class="search" placeholder="Search by name or speciality" aria-label="Search doctors">
+        <div class="filters">
+          <select id="specialityFilter" aria-label="Filter by speciality">
+            <option value="">All Specialities</option>
+            <option>Cardiology</option>
+            <option>Orthopaedics</option>
+            <option>ENT</option>
+            <option>General Surgery</option>
+            <option>Paediatrics</option>
+            <option>Radiology</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div id="doctorsGrid" class="grid" aria-live="polite">
+      <!-- cards inserted by script -->
+    </div>
+
+    <div style="margin-top:18px" class="footer-note">
+      <p style="color:var(--muted)">For appointments call <strong>+91 79 8677 2000</strong> or book online via the Appointment page.</p>
+    </div>
+  </div>
+
+  <script>
+    // Doctor data (update as needed)
+    const doctors = [
+      {
+        id:1, name:'Dr. Rakesh Patel', title:'MD, Cardiology', speciality:'Cardiology',
+        experience:'18 years', dept:'Cardiology', email:'rakesh.patel@lifeline.in', phone:'+91 98240 00001',
+        timings:'Mon, Wed, Fri — 10:00 AM to 2:00 PM', img:'doc1.jpg',
+        bio:'Interventional cardiologist specialising in IHD, angioplasty and heart failure management.'
+      },
+      {
+        id:2, name:'Dr. Meera Shah', title:'MS, Orthopaedics', speciality:'Orthopaedics',
+        experience:'12 years', dept:'Orthopaedics', email:'meera.shah@lifeline.in', phone:'+91 98240 00002',
+        timings:'Tue, Thu — 11:00 AM to 3:00 PM', img:'doc2.jpg',
+        bio:'Joint replacement surgeon with expertise in knee and hip arthroplasty and sports injuries.'
+      },
+      {
+        id:3, name:'Dr. Amit Desai', title:'MBBS, DLO', speciality:'ENT',
+        experience:'10 years', dept:'ENT', email:'amit.desai@lifeline.in', phone:'+91 98240 00003',
+        timings:'Mon–Sat — 9:30 AM to 1:30 PM', img:'doc3.jpg',
+        bio:'ENT surgeon focusing on endoscopic sinus surgery, hearing restoration and paediatric ENT care.'
+      },
+      {
+        id:4, name:'Dr. Sangeeta Rao', title:'MS, General Surgery', speciality:'General Surgery',
+        experience:'15 years', dept:'Surgery', email:'sangeeta.rao@lifeline.in', phone:'+91 98240 00004',
+        timings:'Mon, Tue, Thu — 2:00 PM to 6:00 PM', img:'doc4.jpg',
+        bio:'Minimally invasive surgeon experienced in laparoscopic procedures and emergency surgery.'
+      },
+      {
+        id:5, name:'Dr. Priya Mehta', title:'MD, Paediatrics', speciality:'Paediatrics',
+        experience:'9 years', dept:'Paediatrics', email:'priya.mehta@lifeline.in', phone:'+91 98240 00005',
+        timings:'Wed, Fri — 10:00 AM to 1:00 PM', img:'doc5.jpg',
+        bio:'Paediatrician providing newborn care, growth monitoring and immunisation services.'
+      },
+      {
+        id:6, name:'Dr. Karan Iyer', title:'MD, Radiology', speciality:'Radiology',
+        experience:'11 years', dept:'Radiology', email:'karan.iyer@lifeline.in', phone:'+91 98240 00006',
+        timings:'Mon–Fri — 9:00 AM to 5:00 PM', img:'doc6.jpg',
+        bio:'Lead radiologist with expertise in CT, MRI reporting and interventional radiology procedures.'
+      }
+    ];
+
+    const grid = document.getElementById('doctorsGrid');
+    const searchEl = document.getElementById('search');
+    const specFilter = document.getElementById('specialityFilter');
+
+    function render(list){
+      grid.innerHTML = '';
+      if (!list.length){
+        grid.innerHTML = '<div class="empty">No doctors found for the selected filter / search.</div>';
+        return;
+      }
+      list.forEach(d=>{
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <img class="avatar" src="${d.img}" alt="${d.name}">
+          <div class="info">
+            <h3>${d.name} <span style="font-weight:600;color:var(--muted);font-size:13px"> — ${d.title}</span></h3>
+            <div class="meta">${d.dept} • ${d.experience} experience</div>
+            <div style="color:var(--muted);font-size:13px">${d.bio}</div>
+            <div class="tags"><div class="tag">${d.speciality}</div></div>
+            <div class="contact">
+              <a href="tel:${d.phone.replace(/\s+/g,'')}" aria-label="Call ${d.name}">Call</a>
+              <a href="mailto:${d.email}" aria-label="Email ${d.name}">Email</a>
+              <div style="margin-left:auto;color:var(--muted);font-size:13px">${d.timings}</div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterAndRender(){
+      const q = searchEl.value.trim().toLowerCase();
+      const spec = specFilter.value;
+      let out = doctors.filter(d=>{
+        const matchesQ = q === '' || d.name.toLowerCase().includes(q) || d.speciality.toLowerCase().includes(q) || d.title.toLowerCase().includes(q);
+        const matchesSpec = spec === '' || d.speciality === spec;
+        return matchesQ && matchesSpec;
+      });
+      render(out);
+    }
+
+    // init
+    render(doctors);
+
+    // events
+    searchEl.addEventListener('input', ()=> filterAndRender());
+    specFilter.addEventListener('change', ()=> filterAndRender());
+
+    // keyboard: enter in search focuses first result (accessibility)
+    searchEl.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter'){
+        const first = grid.querySelector('.card a');
+        if(first) first.focus();
+      }
+    });
+  </script>
+</body>
+</html>
