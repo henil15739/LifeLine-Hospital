@@ -155,25 +155,40 @@
   </div>
 
   <script>
-    document.getElementById('loginForm').addEventListener('submit', function(e){
+    // Use server-side SQL authentication. Server should expose POST /api/admin/login
+    document.getElementById('loginForm').addEventListener('submit', async function(e){
       e.preventDefault();
-      
       const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value;
       const errorMsg = document.getElementById('errorMsg');
 
-      const admins = JSON.parse(localStorage.getItem('admins') || '[]');
-      const admin = admins.find(a => a.username === username && a.password === btoa(password));
+      errorMsg.style.display = 'none';
 
-      if(admin){
+      try {
+        const res = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          errorMsg.textContent = data.message || 'Invalid username or password';
+          errorMsg.style.display = 'block';
+          return;
+        }
+
+        // server returns sanitized admin object (no password)
+        const admin = data.admin;
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userRole', 'admin');
         localStorage.setItem('username', admin.username);
         localStorage.setItem('adminId', admin.id);
         localStorage.setItem('adminData', JSON.stringify(admin));
         window.location.href = 'Managment.html';
-      } else {
-        errorMsg.textContent = '✗ Invalid username or password';
+      } catch (err) {
+        console.error('Login error', err);
+        errorMsg.textContent = 'Network/server error. Try again.';
         errorMsg.style.display = 'block';
       }
     });
