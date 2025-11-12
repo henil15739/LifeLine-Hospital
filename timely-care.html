@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timely Diagnosis, Treatment, and Care - LIFELINE Hospital</title>
+  <link rel="stylesheet" href="Style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+      color: #042a35;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #E1F5FE;
+      border-radius: 0 0 20px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+    }
+    .navbar .nav-center a {
+      margin: 0 8px;
+      padding: 8px 14px;
+      text-decoration: none;
+      color: #042a35;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: background 0.18s, color 0.18s;
+    }
+    .navbar .nav-center a:hover {
+      background: #0288d1;
+      color: #fff;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(120deg, #0288d1, #26c6da);
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    /* Info Section */
+    .info-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      padding: 40px 60px;
+      align-items: center;
+      justify-content: center;
+    }
+    .info-section img {
+      width: 400px;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .info-section img:hover {
+      transform: scale(1.05);
+    }
+    .info-text {
+      max-width: 500px;
+    }
+    .info-text h2 {
+      color: #0288d1;
+      margin-bottom: 16px;
+    }
+    .info-text p {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      padding: 40px 60px;
+    }
+    .feature-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+    }
+    .feature-card .icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      color: #0288d1;
+    }
+    .feature-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: #0288d1;
+    }
+    .feature-card p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    /* Footer */
+    .footer {
+      background: #042a35;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="Managment.html"><img src="pic.jpg" alt="Logo" style="width:50px;height:50px;border-radius:50%;"></a>
+      <strong>LIFELINE Hospital</strong>
+    </div>
+    <div class="nav-center">
+      <a href="Managment.html">Home</a>
+      <a href="patientrecord.html">Patient Record</a>
+      <a href="appoinment.html">Appointment</a>
+      <a href="billing2.html">Billing</a>
+      <a href="our-speciality.html">Our Speciality</a>
+      <a href="health-packages.html">Health Packages</a>
+      <a href="timely-care.html" style="background:#0288d1;color:#fff;">Timely Care</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Timely Diagnosis, Treatment, and Care</h1>
+    <p>We ensure that every patient receives accurate diagnosis, immediate treatment, and compassionate care without delay.</p>
+  </section>
+
+  <!-- Info Section -->
+  <section class="info-section">
+    <img src="care-facilities.webp" alt="Timely Care">
+    <div class="info-text">
+      <h2>Our Promise</h2>
+      <p>At LIFELINE Hospital, we understand that time is critical in healthcare. Our advanced diagnostic facilities, expert doctors, and efficient staff work together to provide immediate attention to every patient.</p>
+      <p>From emergency care to routine check-ups, we prioritize timely interventions that save lives and improve recovery outcomes.</p>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="feature-card">
+      <div class="icon">⏱️</div>
+      <h3>Quick Diagnosis</h3>
+      <p>State-of-the-art labs and imaging ensure accurate results in minimal time.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">⚕️</div>
+      <h3>Immediate Treatment</h3>
+      <p>Emergency response teams and specialists available 24/7 for urgent care.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🤝</div>
+      <h3>Compassionate Care</h3>
+      <p>Friendly staff and doctors who treat patients with empathy and respect.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🏥</div>
+      <h3>Advanced Facilities</h3>
+      <p>Modern ICUs, operation theatres, and recovery wards designed for efficiency.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    © 2025 LIFELINE Hospital | All Rights Reserved
+  </footer>
+
+  <script>
+    // Scroll reveal animation
+    const cards = document.querySelectorAll('.feature-card');
+    const revealOnScroll = () => {
+      const triggerBottom = window.innerHeight * 0.85;
+      cards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        if(cardTop < triggerBottom){
+          card.style.opacity = 1;
+          card.style.transform = "translateY(0)";
+        }
+      });
+    };
+    cards.forEach(card => {
+      card.style.opacity = 0;
+      card.style.transform = "translateY(40px)";
+      card.style.transition = "all 0.6s ease-out";
+    });
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+  </script>
+</body>
+</html>

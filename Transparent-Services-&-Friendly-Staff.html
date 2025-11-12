@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transparent Services & Friendly Staff - LIFELINE Hospital</title>
+  <link rel="stylesheet" href="Style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+      color: #042a35;
+    }
+
+    /* Navbar reuse */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #E1F5FE;
+      border-radius: 0 0 20px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+    }
+    .navbar .nav-center a {
+      margin: 0 8px;
+      padding: 8px 14px;
+      text-decoration: none;
+      color: #042a35;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: background 0.18s, color 0.18s;
+    }
+    .navbar .nav-center a:hover {
+      background: #0288d1;
+      color: #fff;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(120deg, #0288d1, #26c6da);
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    /* Content Section */
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      padding: 40px 60px;
+      align-items: center;
+      justify-content: center;
+    }
+    .content img {
+      width: 400px;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .content img:hover {
+      transform: scale(1.05);
+    }
+    .text-block {
+      max-width: 500px;
+    }
+    .text-block h2 {
+      color: #0288d1;
+      margin-bottom: 16px;
+    }
+    .text-block p {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    /* Staff Cards */
+    .staff-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      padding: 40px 60px;
+    }
+    .staff-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .staff-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+    }
+    .staff-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 12px;
+    }
+    .staff-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+      color: #0288d1;
+    }
+    .staff-card p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    /* Footer */
+    .footer {
+      background: #042a35;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="Managment.html"><img src="pic.jpg" alt="Logo" style="width:50px;height:50px;border-radius:50%;"></a>
+      <strong>LIFELINE Hospital</strong>
+    </div>
+    <div class="nav-center">
+      <a href="Managment.html">Home</a>
+      <a href="patientrecord.html">Patient Record</a>
+      <a href="appoinment.html">Appointment</a>
+      <a href="billing2.html">Billing</a>
+      <a href="our-speciality.html">Our Speciality</a>
+      <a href="health-packages.html">Health Packages</a>
+      <a href="transparent-services.html" style="background:#0288d1;color:#fff;">Transparent Services</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Transparent Services & Friendly Staff</h1>
+    <p>We believe in honesty, clarity, and compassionate care for every patient who walks through our doors.</p>
+  </section>
+
+  <!-- Content Section -->
+  <section class="content">
+    <img src="Transparent-services.webp" alt="Friendly Staff">
+    <div class="text-block">
+      <h2>Our Commitment</h2>
+      <p>At LIFELINE Hospital, transparency is at the heart of our services. From billing to treatment plans, we ensure that patients and families are fully informed at every step.</p>
+      <p>Our staff is trained not only in medical excellence but also in empathy, communication, and patient support. We strive to create a welcoming environment where patients feel cared for and respected.</p>
+    </div>
+  </section>
+
+  <!-- Staff Cards -->
+  <section class="staff-container">
+    <div class="staff-card">
+      <img src="staff1.jpg" alt="Doctor">
+      <h3>Dr. Meera Patel</h3>
+      <p>Cardiologist known for her compassionate approach and clear communication with patients.</p>
+    </div>
+    <div class="staff-card">
+      <img src="staff2.jpg" alt="Nurse">
+      <h3>Nurse Rahul Sharma</h3>
+      <p>Always ready with a smile, ensuring patients feel comfortable and supported during treatment.</p>
+    </div>
+    <div class="staff-card">
+      <img src="staff3.jpg" alt="Receptionist">
+      <h3>Anita Desai</h3>
+      <p>Front desk executive who guides patients with patience and clarity through hospital processes.</p>
+    </div>
+    <div class="staff-card">
+      <img src="staff4.jpg" alt="Technician">
+      <h3>Arjun Singh</h3>
+      <p>Lab technician dedicated to accuracy and explaining procedures to patients in simple terms.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    © 2025 LIFELINE Hospital | All Rights Reserved
+  </footer>
+
+  <script>
+    // Scroll reveal animation
+    const cards = document.querySelectorAll('.staff-card');
+    const revealOnScroll = () => {
+      const triggerBottom = window.innerHeight * 0.85;
+      cards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        if(cardTop < triggerBottom){
+          card.style.opacity = 1;
+          card.style.transform = "translateY(0)";
+        }
+      });
+    };
+    cards.forEach(card => {
+      card.style.opacity = 0;
+      card.style.transform = "translateY(40px)";
+      card.style.transition = "all 0.6s ease-out";
+    });
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+  </script>
+</body>
+</html>

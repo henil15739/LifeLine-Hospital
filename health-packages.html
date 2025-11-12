@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Packages - LIFELINE Hospital</title>
+  <link rel="stylesheet" href="Style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+      color: #042a35;
+    }
+
+    /* Navbar reuse */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #E1F5FE;
+      border-radius: 0 0 20px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+    }
+    .navbar .nav-center a {
+      margin: 0 8px;
+      padding: 8px 14px;
+      text-decoration: none;
+      color: #042a35;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: background 0.18s, color 0.18s;
+    }
+    .navbar .nav-center a:hover {
+      background: #0288d1;
+      color: #fff;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(120deg, #0288d1, #26c6da);
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    /* Package Cards */
+    .package-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      padding: 40px 60px;
+    }
+    .package-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .package-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+    }
+    .package-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: #0288d1;
+    }
+    .package-card p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 12px;
+    }
+    .price {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #ff6f00;
+      margin-bottom: 16px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 18px;
+      background: linear-gradient(90deg,#0288d1,#26c6da);
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg,#0277bd,#00acc1);
+    }
+
+    /* Footer */
+    .footer {
+      background: #042a35;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="Managment.html"><img src="pic.jpg" alt="Logo" style="width:50px;height:50px;border-radius:50%;"></a>
+      <strong>LIFELINE Hospital</strong>
+    </div>
+    <div class="nav-center">
+      <a href="Managment.html">Home</a>
+      <a href="patientrecord.html">Patient Record</a>
+      <a href="appoinment.html">Appointment</a>
+      <a href="billing2.html">Billing</a>
+      <a href="our-speciality.html">Our Speciality</a>
+      <a href="health-packages.html" style="background:#0288d1;color:#fff;">Health Packages</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Health Packages</h1>
+    <p>Affordable preventive health check-ups designed for every age group and family member.</p>
+  </section>
+
+  <!-- Package Cards -->
+  <section class="package-container">
+    <div class="package-card">
+      <h3>Basic Health Checkup</h3>
+      <p>Includes blood test, urine test, blood pressure, and general physician consultation.</p>
+      <div class="price">₹999</div>
+      <a href="#" class="btn">Book Now</a>
+    </div>
+    <div class="package-card">
+      <h3>Comprehensive Health Package</h3>
+      <p>Full body checkup including ECG, X-Ray, liver & kidney function tests, and specialist consultation.</p>
+      <div class="price">₹2999</div>
+      <a href="#" class="btn">Book Now</a>
+    </div>
+    <div class="package-card">
+      <h3>Senior Citizen Package</h3>
+      <p>Specialized tests for heart, bones, diabetes, and vision care tailored for elderly patients.</p>
+      <div class="price">₹1999</div>
+      <a href="#" class="btn">Book Now</a>
+    </div>
+    <div class="package-card">
+      <h3>Women Wellness Package</h3>
+      <p>Includes gynecological consultation, breast & cervical screening, thyroid and vitamin tests.</p>
+      <div class="price">₹2499</div>
+      <a href="#" class="btn">Book Now</a>
+    </div>
+    <div class="package-card">
+      <h3>Child Care Package</h3>
+      <p>Growth monitoring, vaccination review, pediatric consultation, and nutritional assessment.</p>
+      <div class="price">₹1499</div>
+      <a href="#" class="btn">Book Now</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    © 2025 LIFELINE Hospital | All Rights Reserved
+  </footer>
+
+  <script>
+    // Smooth scroll reveal animation
+    const cards = document.querySelectorAll('.package-card');
+    const revealOnScroll = () => {
+      const triggerBottom = window.innerHeight * 0.85;
+      cards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        if(cardTop < triggerBottom){
+          card.style.opacity = 1;
+          card.style.transform = "translateY(0)";
+        }
+      });
+    };
+    cards.forEach(card => {
+      card.style.opacity = 0;
+      card.style.transform = "translateY(40px)";
+      card.style.transition = "all 0.6s ease-out";
+    });
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+  </script>
+</body>
+</html>

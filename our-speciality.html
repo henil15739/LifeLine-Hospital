@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Speciality - LIFELINE Hospital</title>
+  <link rel="stylesheet" href="Style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+      color: #042a35;
+    }
+
+    /* Navbar reuse */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #E1F5FE;
+      border-radius: 0 0 20px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+    }
+    .navbar .nav-center a {
+      margin: 0 8px;
+      padding: 8px 14px;
+      text-decoration: none;
+      color: #042a35;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: background 0.18s, color 0.18s;
+    }
+    .navbar .nav-center a:hover {
+      background: #0288d1;
+      color: #fff;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(120deg, #0288d1, #26c6da);
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    /* Speciality Cards */
+    .speciality-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      padding: 40px 60px;
+    }
+    .speciality-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .speciality-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+    }
+    .speciality-card img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 16px;
+    }
+    .speciality-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: #0288d1;
+    }
+    .speciality-card p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    /* Footer */
+    .footer {
+      background: #042a35;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="Managment.html"><img src="pic.jpg" alt="Logo" style="width:50px;height:50px;border-radius:50%;"></a>
+      <strong>LIFELINE Hospital</strong>
+    </div>
+    <div class="nav-center">
+      <a href="Managment.html">Home</a>
+      <a href="patientrecord.html">Patient Record</a>
+      <a href="appoinment.html">Appointment</a>
+      <a href="billing2.html">Billing</a>
+      <a href="speciality.html" style="background:#0288d1;color:#fff;">Our Speciality</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Our Specialities</h1>
+    <p>We bring together advanced medical expertise, cutting-edge technology, and compassionate care across multiple disciplines.</p>
+  </section>
+
+  <!-- Speciality Cards -->
+  <section class="speciality-container">
+    <div class="speciality-card">
+      <img src="cardiology.png" alt="Cardiology">
+      <h3>Cardiology</h3>
+      <p>World-class heart care with advanced diagnostics, angioplasty, and cardiac surgery facilities.</p>
+    </div>
+    <div class="speciality-card">
+      <img src="neurology.png" alt="Neurology">
+      <h3>Neurology</h3>
+      <p>Comprehensive treatment for brain, spine, and nervous system disorders with modern neuroimaging.</p>
+    </div>
+    <div class="speciality-card">
+      <img src="orthopedics.png" alt="Orthopedics">
+      <h3>Orthopedics</h3>
+      <p>Expert care for bones, joints, and sports injuries with minimally invasive surgical options.</p>
+    </div>
+    <div class="speciality-card">
+      <img src="oncology.png" alt="Oncology">
+      <h3>Oncology</h3>
+      <p>Advanced cancer care with chemotherapy, radiation therapy, and surgical oncology under one roof.</p>
+    </div>
+    <div class="speciality-card">
+      <img src="pediatrics.png" alt="Pediatrics">
+      <h3>Pediatrics</h3>
+      <p>Dedicated child care with neonatal ICU, vaccinations, and specialized pediatric treatments.</p>
+    </div>
+    <div class="speciality-card">
+      <img src="gynecology.png" alt="Gynecology">
+      <h3>Gynecology</h3>
+      <p>Comprehensive women’s health services including maternity, fertility, and preventive care.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    © 2025 LIFELINE Hospital | All Rights Reserved
+  </footer>
+</body>
+</html>
