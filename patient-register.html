@@ -209,9 +209,11 @@
   </div>
 
   <script>
-    document.getElementById('registerForm').addEventListener('submit', function(e){
+    // Send registration to server instead of localStorage
+    document.getElementById('registerForm').addEventListener('submit', async function(e){
       e.preventDefault();
-      
+
+      // collect fields (same IDs as before)
       const fullname = document.getElementById('fullname').value.trim();
       const dob = document.getElementById('dob').value;
       const gender = document.getElementById('gender').value;
@@ -222,101 +224,31 @@
       const password = document.getElementById('patientPassword').value;
       const confirmPassword = document.getElementById('confirmPassword').value;
 
-      let isValid = true;
+      // basic client validation (keep existing checks)
+      if (!fullname || fullname.length < 3) { alert('Name error'); return; }
+      if (!username || username.length < 4) { alert('Username error'); return; }
+      if (!password || password.length < 6 || password !== confirmPassword) { alert('Password error'); return; }
 
-      if(!fullname || fullname.length < 3){
-        document.getElementById('nameError').textContent = 'Name must be at least 3 characters';
-        isValid = false;
-      } else {
-        document.getElementById('nameError').textContent = '';
+      const payload = { fullname, dob, gender, email, phone, address, username, password };
+
+      try {
+        const resp = await fetch('/api/patient/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await resp.json();
+        if (!resp.ok) {
+          alert(data.message || 'Registration failed');
+          return;
+        }
+        document.getElementById('successMsg').textContent = '✓ Registration successful! Redirecting to login...';
+        document.getElementById('successMsg').style.display = 'block';
+        setTimeout(()=> window.location.href = 'patient-login.html', 1200);
+      } catch(err){
+        console.error('Register error', err);
+        alert('Network or server error during registration.');
       }
-
-      if(!dob){
-        document.getElementById('dobError').textContent = 'Date of birth is required';
-        isValid = false;
-      } else {
-        document.getElementById('dobError').textContent = '';
-      }
-
-      if(!gender){
-        document.getElementById('genderError').textContent = 'Gender is required';
-        isValid = false;
-      } else {
-        document.getElementById('genderError').textContent = '';
-      }
-
-      if(!email || !email.includes('@')){
-        document.getElementById('emailError').textContent = 'Enter a valid email';
-        isValid = false;
-      } else {
-        document.getElementById('emailError').textContent = '';
-      }
-
-      if(!phone || phone.length < 10){
-        document.getElementById('phoneError').textContent = 'Enter a valid phone number';
-        isValid = false;
-      } else {
-        document.getElementById('phoneError').textContent = '';
-      }
-
-      if(!address){
-        document.getElementById('addressError').textContent = 'Address is required';
-        isValid = false;
-      } else {
-        document.getElementById('addressError').textContent = '';
-      }
-
-      if(!username || username.length < 4){
-        document.getElementById('usernameError').textContent = 'Username must be at least 4 characters';
-        isValid = false;
-      } else {
-        document.getElementById('usernameError').textContent = '';
-      }
-
-      if(!password || password.length < 6){
-        document.getElementById('passwordError').textContent = 'Password must be at least 6 characters';
-        isValid = false;
-      } else {
-        document.getElementById('passwordError').textContent = '';
-      }
-
-      if(password !== confirmPassword){
-        document.getElementById('confirmError').textContent = 'Passwords do not match';
-        isValid = false;
-      } else {
-        document.getElementById('confirmError').textContent = '';
-      }
-
-      const patients = JSON.parse(localStorage.getItem('patients') || '[]');
-      if(patients.some(p => p.username === username)){
-        document.getElementById('usernameError').textContent = 'Username already exists';
-        isValid = false;
-      }
-
-      if(!isValid) return;
-
-      const newPatient = {
-        id: Date.now(),
-        fullname,
-        dob,
-        gender,
-        email,
-        phone,
-        address,
-        username,
-        password: btoa(password),
-        createdAt: new Date().toISOString()
-      };
-
-      patients.push(newPatient);
-      localStorage.setItem('patients', JSON.stringify(patients));
-
-      document.getElementById('successMsg').textContent = '✓ Registration successful! Redirecting to login...';
-      document.getElementById('successMsg').style.display = 'block';
-      
-      setTimeout(() => {
-        window.location.href = 'patient-login.html';
-      }, 1500);
     });
   </script>
 </body>
