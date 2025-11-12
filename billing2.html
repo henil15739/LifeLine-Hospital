@@ -206,11 +206,16 @@
       color:#b8d9dd;
        margin:6px 0; 
       }
+
+    /* small helper for bills list */
+    .my-bills { display:flex; flex-direction:column; gap:12px; }
+    .bill-card { border:1px solid #e6f3f8; padding:12px; border-radius:8px; background:#fff; }
+    .bill-card h4 { margin:0 0 8px 0; }
   </style>
 </head>
 <body>
   <script>
-    // Check authentication
+    // Check authentication (unchanged logic) but allow both roles
     function checkAccess(){
       const isLoggedIn = localStorage.getItem('isLoggedIn');
       if(!isLoggedIn){
@@ -245,8 +250,17 @@
 
     <main class="billing" role="main">
       <div class="billing-grid">
-        <section>
+        <!-- Admin: show billing form. Patient: will see 'your bills' list instead -->
+        <section id="billingFormSection">
           <form id="billForm" class="form" autocomplete="off">
+            <!-- admin-only patient selector -->
+            <div class="form-row" id="patientSelectRow" style="display:none">
+              <select id="patientSelect" aria-label="Select patient">
+                <option value="">-- Select patient (username) --</option>
+              </select>
+              <input id="patientEmail" type="text" placeholder="Patient email (auto)" readonly>
+            </div>
+
             <div class="form-row">
               <input id="patientName" type="text" placeholder="Patient Name" required>
               <input id="invoiceNo" type="text" placeholder="Invoice # (auto)" readonly>
@@ -259,35 +273,43 @@
             </div>
 
             <div style="display:flex;gap:10px;align-items:center">
-              <button id="saveBill" class="btn" type="button">Save Bill</button>
+              <button id="saveBill" class="btn" type="button">Save & Email Bill</button>
               <button id="clearBtn" class="btn ghost" type="button">Clear</button>
             </div>
 
-            <small style="color:var(--muted)">Saved bills are stored locally in your browser.</small>
+            <small id="formNote" style="color:var(--muted)">Only admins can create and email bills. Patients can view their bills below.</small>
           </form>
         </section>
 
+        <!-- Charges area reused for both roles -->
         <aside class="charges" aria-label="Charges and total">
-          <table id="chargesTable" aria-hidden="false">
-            <thead>
-              <tr><th>Charge</th><th style="width:120px">Amount (₹)</th></tr>
-            </thead>
-            <tbody id="chargesBody">
-              <tr><td colspan="2" style="text-align:center;color:var(--muted)">No charges yet</td></tr>
-            </tbody>
-          </table>
+          <div id="billsViewer">
+            <!-- For admin: shows current charges in editor. For patient: replaced with their bills list -->
+            <table id="chargesTable" aria-hidden="false">
+              <thead>
+                <tr><th>Charge</th><th style="width:120px">Amount (₹)</th></tr>
+              </thead>
+              <tbody id="chargesBody">
+                <tr><td colspan="2" style="text-align:center;color:var(--muted)">No charges yet</td></tr>
+              </tbody>
+            </table>
 
-          <div class="total" id="totalDisplay">Total: ₹0</div>
+            <div class="total" id="totalDisplay">Total: ₹0</div>
 
-          <div class="card-actions">
-            <button id="downloadBtn" class="btn ghost" type="button">Download CSV</button>
-            <button id="printBtn" class="btn" type="button">Print</button>
+            <div class="card-actions">
+              <button id="downloadBtn" class="btn ghost" type="button">Download CSV</button>
+              <button id="printBtn" class="btn" type="button">Print</button>
+            </div>
           </div>
+
+          <!-- Patient bills list shown only for patients -->
+          <div id="myBillsList" style="display:none; margin-top:8px;"></div>
         </aside>
       </div>
     </main>
 
     <div class="footer" role="contentinfo">
+      <!-- ...existing footer... -->
       <div class="cols">
         <div style="flex:1;min-width:220px">
           <h4>LIFELINE Hospital</h4>
@@ -310,10 +332,20 @@
     </div>
   </div>
 
+  <!-- EmailJS SDK (replace IDs below) -->
+  <script type="text/javascript" src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
+
   <script>
-    // Simple billing storage per invoice stored in localStorage.bills
+    // initialize EmailJS - REPLACE with your EmailJS user id
+    try {
+      if(window.emailjs) emailjs.init('YOUR_EMAILJS_USER_ID');
+    } catch(e){ console.warn('EmailJS init failed', e); }
+
+    // elements
     const invoiceNoEl = document.getElementById('invoiceNo');
     const patientEl = document.getElementById('patientName');
+    const patientSelect = document.getElementById('patientSelect');
+    const patientEmailEl = document.getElementById('patientEmail');
     const chargeNameEl = document.getElementById('chargeName');
     const chargeAmountEl = document.getElementById('chargeAmount');
     const addChargeBtn = document.getElementById('addCharge');
@@ -323,11 +355,62 @@
     const printBtn = document.getElementById('printBtn');
     const saveBillBtn = document.getElementById('saveBill');
     const clearBtn = document.getElementById('clearBtn');
+    const myBillsList = document.getElementById('myBillsList');
+    const patientSelectRow = document.getElementById('patientSelectRow');
+    const billingFormSection = document.getElementById('billingFormSection');
 
     let charges = [];
     let invoiceCounter = Number(localStorage.getItem('invoiceCounter') || 1000);
     function newInvoice() { invoiceCounter++; localStorage.setItem('invoiceCounter', invoiceCounter); invoiceNoEl.value = 'INV' + invoiceCounter; }
     newInvoice();
+
+    // Get current user role and username
+    const userRole = localStorage.getItem('userRole');
+    const username = localStorage.getItem('username');
+
+    // prepare UI based on role
+    function setupRoleUI(){
+      if(userRole === 'admin'){
+        // show patient selector and enable form
+        patientSelectRow.style.display = 'flex';
+        billingFormSection.style.display = 'block';
+        populatePatientSelect();
+        saveBillBtn.disabled = false;
+        document.getElementById('formNote').textContent = 'Create bills for patients and optionally email them.';
+      } else {
+        // patient: hide form, show their bills
+        billingFormSection.style.display = 'none';
+        displayPatientBills();
+      }
+
+      // if patientData exists, prefill patientName for patient or when admin selects a patient
+      const pData = JSON.parse(localStorage.getItem('patientData') || 'null');
+      if(userRole === 'patient' && pData){
+        // show patient's own name at top
+        patientEl.value = pData.fullname || username;
+      }
+    }
+
+    // populate patient selector (admin)
+    function populatePatientSelect(){
+      const patients = JSON.parse(localStorage.getItem('patients') || '[]');
+      patientSelect.innerHTML = '<option value="">-- Select patient (username) --</option>';
+      patients.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.username;
+        opt.textContent = `${p.fullname} (${p.username})`;
+        opt.dataset.email = p.email || '';
+        opt.dataset.fullname = p.fullname || '';
+        patientSelect.appendChild(opt);
+      });
+      patientSelect.addEventListener('change', ()=> {
+        const sel = patientSelect.selectedOptions[0];
+        if(sel){
+          patientEl.value = sel.dataset.fullname || sel.textContent || '';
+          patientEmailEl.value = sel.dataset.email || '';
+        }
+      });
+    }
 
     function renderCharges(){
       chargesBody.innerHTML = '';
@@ -364,24 +447,78 @@
       renderCharges();
     });
 
-    saveBillBtn.addEventListener('click', ()=>{
-      const patient = patientEl.value.trim();
-      if (!patient) { alert('Enter patient name'); return; }
-      if (!charges.length) { alert('Add at least one charge'); return; }
-      const bill = { invoice: invoiceNoEl.value || ('INV'+Date.now()), patient, charges, total: charges.reduce((s,c)=>s+Number(c.amount),0), created: new Date().toISOString() };
+    // Save bill (admin only)
+    saveBillBtn.addEventListener('click', async ()=>{
+      if(userRole !== 'admin'){ alert('Only admins can create bills.'); return; }
+      const patientName = patientEl.value.trim();
+      const patientUsername = patientSelect.value || ''; // could be empty if admin typed manual name
+      const patientEmail = patientEmailEl.value.trim();
+      if(!patientName){ alert('Enter/select patient name'); return; }
+      if(!charges.length){ alert('Add at least one charge'); return; }
+
+      const bill = {
+        invoice: invoiceNoEl.value || ('INV'+Date.now()),
+        patient: patientName,
+        patientUsername: patientUsername || null,
+        patientEmail: patientEmail || '',
+        charges: charges.slice(),
+        total: charges.reduce((s,c)=>s+Number(c.amount),0),
+        created: new Date().toISOString(),
+        createdBy: username || 'admin'
+      };
+
       const stored = JSON.parse(localStorage.getItem('bills') || '[]');
       stored.push(bill);
       localStorage.setItem('bills', JSON.stringify(stored));
-      alert('Bill saved locally');
+
+      // Attempt to send email via EmailJS (replace service/template IDs)
+      try {
+        if(window.emailjs && (patientEmail || patientUsername)) {
+          // If email empty but patientUsername set, try to fetch patient's email from storage
+          let toEmail = patientEmail;
+          if(!toEmail && patientUsername){
+            const patients = JSON.parse(localStorage.getItem('patients') || '[]');
+            const p = patients.find(x=>x.username===patientUsername);
+            if(p) toEmail = p.email || '';
+          }
+
+          const htmlCharges = bill.charges.map(c => `<tr><td>${escapeHtml(c.name)}</td><td style="text-align:right">₹${Number(c.amount).toFixed(2)}</td></tr>`).join('');
+          const billHtml = `<h3>Invoice: ${bill.invoice}</h3><p>Patient: ${escapeHtml(bill.patient)}</p>
+            <table style="width:100%;border-collapse:collapse;"><thead><tr><th style="background:#0288d1;color:#fff;padding:6px">Charge</th><th style="background:#0288d1;color:#fff;padding:6px;text-align:right">Amount</th></tr></thead><tbody>${htmlCharges}</tbody></table>
+            <h4 style="text-align:right">Total: ₹${bill.total.toFixed(2)}</h4>`;
+
+          const templateParams = {
+            to_name: bill.patient,
+            to_email: toEmail,
+            invoice: bill.invoice,
+            message_html: billHtml,
+            from_name: 'LIFELINE Hospital'
+          };
+
+          // REPLACE 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your EmailJS values
+          await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams);
+          alert('Bill saved locally and emailed to patient (if email set).');
+        } else {
+          alert('Bill saved locally. No email sent (EmailJS not configured or no patient email).');
+        }
+      } catch(err){
+        console.warn('Email send error', err);
+        alert('Bill saved locally. Email sending failed (see console).');
+      }
+
       // reset for next invoice
       charges = [];
       renderCharges();
-      patientEl.value=''; newInvoice();
+      patientEl.value=''; patientSelect.value=''; patientEmailEl.value='';
+      newInvoice();
     });
 
+    // Download current charges CSV (admin editing)
     downloadBtn.addEventListener('click', ()=>{
+      if(userRole !== 'admin' && userRole !== 'patient'){ return; }
+      // If admin editing currently, use charges; for patient we won't use this button (list view has its own download)
+      if(!charges.length){ alert('No charges to download'); return; }
       const patient = patientEl.value.trim() || 'patient';
-      if (!charges.length) { alert('No charges to download'); return; }
       let csv = `Invoice,${invoiceNoEl.value}\nPatient,${patient}\nCharge,Amount\n`;
       charges.forEach(c => csv += `"${c.name.replace(/"/g,'""')}",${c.amount}\n`);
       const total = charges.reduce((s,c)=>s+Number(c.amount),0);
@@ -393,7 +530,9 @@
       document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
     });
 
+    // Print current charges (admin editing)
     printBtn.addEventListener('click', ()=>{
+      if(!charges.length){ alert('No charges to print'); return; }
       const w = window.open('', '_blank', 'width=800,height=900');
       const doc = w.document;
       const patient = escapeHtml(patientEl.value || '');
@@ -416,10 +555,77 @@
       charges = []; renderCharges();
     });
 
+    // Patient view: display bills belonging to logged-in patient
+    function displayPatientBills(){
+      myBillsList.style.display = 'block';
+      myBillsList.innerHTML = '<h3>Your Bills</h3><div class="my-bills" id="myBillsContainer"></div>';
+      const container = document.getElementById('myBillsContainer');
+      const allBills = JSON.parse(localStorage.getItem('bills') || '[]');
+      // match by patientUsername if available, otherwise by patient name matching stored patientData.fullname
+      const pData = JSON.parse(localStorage.getItem('patientData') || 'null');
+      const myUsername = username;
+      const myFullname = pData ? pData.fullname : null;
+      const myBills = allBills.filter(b => (b.patientUsername && myUsername && b.patientUsername === myUsername) || (myFullname && b.patient && b.patient === myFullname));
+
+      if(!myBills.length){
+        container.innerHTML = '<div class="bill-card">No bills found.</div>';
+        return;
+      }
+
+      container.innerHTML = '';
+      myBills.forEach(b=>{
+        const div = document.createElement('div');
+        div.className = 'bill-card';
+        div.innerHTML = `<h4>Invoice: ${escapeHtml(b.invoice)} <small style="font-weight:400;color:#666">(${new Date(b.created).toLocaleString()})</small></h4>
+          <p><strong>Patient:</strong> ${escapeHtml(b.patient)}</p>
+          <table style="width:100%;border-collapse:collapse;"><thead><tr><th style="text-align:left">Charge</th><th style="text-align:right">Amount</th></tr></thead>
+          <tbody>${b.charges.map(c=>`<tr><td>${escapeHtml(c.name)}</td><td style="text-align:right">₹${Number(c.amount).toFixed(2)}</td></tr>`).join('')}</tbody></table>
+          <p style="text-align:right;font-weight:800;margin:8px 0">Total: ₹${Number(b.total).toFixed(2)}</p>
+          <div style="display:flex;gap:8px;justify-content:flex-end">
+            <button class="btn viewBtn">View</button>
+            <button class="btn ghost downloadBillBtn">Download CSV</button>
+            <button class="btn" onclick="">Print</button>
+          </div>`;
+        // attach download
+        div.querySelector('.downloadBillBtn').addEventListener('click', ()=> {
+          let csv = `Invoice,${b.invoice}\nPatient,${b.patient}\nCharge,Amount\n`;
+          b.charges.forEach(c => csv += `"${c.name.replace(/"/g,'""')}",${c.amount}\n`);
+          csv += `Total,${b.total}\n`;
+          const blob = new Blob([csv], { type: 'text/csv' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url; a.download = `${b.patient}_bill_${b.invoice}.csv`;
+          document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+        });
+        // attach print
+        div.querySelectorAll('button').forEach(btn=>{
+          if(btn.textContent.trim() === 'Print'){
+            btn.addEventListener('click', ()=>{
+              const w = window.open('', '_blank', 'width=800,height=900');
+              const doc = w.document;
+              let rows = '';
+              b.charges.forEach(c => rows += `<tr><td>${escapeHtml(c.name)}</td><td style="text-align:right">₹${Number(c.amount).toFixed(2)}</td></tr>`);
+              doc.write(`<html><head><title>Bill - ${escapeHtml(b.invoice)}</title>
+                <style>body{font-family:Arial;padding:24px}table{width:100%;border-collapse:collapse}td,th{padding:8px;border-bottom:1px solid #ddd}th{background:#0288d1;color:#fff}</style>
+                </head><body>
+                <h2>LIFELINE Hospital</h2><p>Invoice: ${escapeHtml(b.invoice)}</p><p>Patient: ${escapeHtml(b.patient)}</p>
+                <table><thead><tr><th>Charge</th><th style="text-align:right">Amount</th></tr></thead><tbody>${rows}</tbody></table>
+                <h3 style="text-align:right">Total: ₹${Number(b.total).toFixed(2)}</h3>
+                </body></html>`);
+              doc.close(); w.print();
+            });
+          }
+        });
+
+        container.appendChild(div);
+      });
+    }
+
     // helpers
     function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]); }
 
-    // initial state
+    // initial UI setup
+    setupRoleUI();
     renderCharges();
   </script>
 </body>
