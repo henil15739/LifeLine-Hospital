@@ -192,7 +192,7 @@
   </div>
 
   <script>
-    document.getElementById('registerForm').addEventListener('submit', function(e){
+    document.getElementById('registerForm').addEventListener('submit', async function(e){
       e.preventDefault();
       
       const fullname = document.getElementById('fullname').value.trim();
@@ -255,37 +255,35 @@
         document.getElementById('confirmError').textContent = '';
       }
 
-      // Check if username already exists
-      const admins = JSON.parse(localStorage.getItem('admins') || '[]');
-      if(admins.some(a => a.username === username)){
-        document.getElementById('usernameError').textContent = 'Username already exists';
-        isValid = false;
-      }
-
       if(!isValid) return;
 
-      // Save admin
-      const newAdmin = {
-        id: Date.now(),
-        fullname,
-        email,
-        phone,
-        department,
-        username,
-        password: btoa(password), // Simple encoding (not secure for production)
-        createdAt: new Date().toISOString()
-      };
+      // Send to server API to store in SQL DB (server must expose /api/admin/register)
+      try {
+        const payload = { fullname, email, phone, department, username, password };
+        const res = await fetch('/api/admin/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          // handle common server errors (e.g. username exists)
+          if (res.status === 409) {
+            document.getElementById('usernameError').textContent = data.message || 'Username already exists';
+          } else {
+            alert(data.message || 'Registration failed on server');
+          }
+          return;
+        }
 
-      admins.push(newAdmin);
-      localStorage.setItem('admins', JSON.stringify(admins));
-
-      // Show success and redirect
-      document.getElementById('successMsg').textContent = '✓ Registration successful! Redirecting to login...';
-      document.getElementById('successMsg').style.display = 'block';
-      
-      setTimeout(() => {
-        window.location.href = 'admin-login.html';
-      }, 1500);
+        // success
+        document.getElementById('successMsg').textContent = '✓ Registration successful! Redirecting to login...';
+        document.getElementById('successMsg').style.display = 'block';
+        setTimeout(() => { window.location.href = 'admin-login.html'; }, 1200);
+      } catch (err) {
+        console.error('Registration error', err);
+        alert('Network or server error while registering. See console.');
+      }
     });
   </script>
 </body>
