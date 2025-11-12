@@ -153,30 +153,48 @@
       </div>
     </form>
   </div>
-
-  <script>
-    document.getElementById('loginForm').addEventListener('submit', function(e){
-      e.preventDefault();
       
+  <script>
+    // send credentials to server-side SQL-backed API instead of checking localStorage
+    document.getElementById('loginForm').addEventListener('submit', async function(e){
+      e.preventDefault();
+
       const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value;
       const errorMsg = document.getElementById('errorMsg');
 
-      const patients = JSON.parse(localStorage.getItem('patients') || '[]');
-      const patient = patients.find(p => p.username === username && p.password === btoa(password));
+      try {
+        const resp = await fetch('/api/patient/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await resp.json();
 
-      if(patient){
+        if (!resp.ok) {
+          errorMsg.textContent = data.message || 'Invalid username or password';
+          errorMsg.style.display = 'block';
+          return;
+        }
+
+        // on success store session values (keeps existing client-side logic)
+        const patient = data.patient;
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userRole', 'patient');
         localStorage.setItem('username', patient.username);
         localStorage.setItem('patientId', patient.id);
         localStorage.setItem('patientData', JSON.stringify(patient));
+
+        // redirect to main app
         window.location.href = 'Managment.html';
-      } else {
-        errorMsg.textContent = '✗ Invalid username or password';
+      } catch (err) {
+        console.error('Login error', err);
+        errorMsg.textContent = 'Network error. Try again.';
         errorMsg.style.display = 'block';
       }
     });
   </script>
 </body>
 </html>
+
+
